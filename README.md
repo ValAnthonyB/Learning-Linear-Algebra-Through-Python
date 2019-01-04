@@ -6,3 +6,6 @@ In this repository, I code up some essential concepts in linear algebra from **G
 * Visualizing 2-D and 3-D vectors using matplotlib
 * Computing dot products of vectors from scratch and using numpy.linalg
 * Computing matrix multiplication
+
+***02 Elimination***
+* Gaussian elimination of a square matrix
