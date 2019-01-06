@@ -8,4 +8,5 @@ In this repository, I code up some essential concepts in linear algebra from **G
 * Computing matrix multiplication
 
 ***02 Elimination***
-* Gaussian elimination of a square matrix
+* Gaussian elimination of a square matrix using forward elimination
+* Gaussian elimination of a square matrix using elementary matrices
