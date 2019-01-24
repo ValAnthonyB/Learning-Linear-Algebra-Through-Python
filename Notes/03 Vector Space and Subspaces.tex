@@ -1,14 +1,185 @@
 \documentclass[letterpaper]{article}
 \usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb,amsfonts, enumitem, fancyhdr, color, comment, graphicx, environ}
+
 
 \author{Val Anthony Balagon}
 \date{January 2019}
 \title{Chapter 3: Vector Spaces and Subspaces}
+
+%User commands
+\newcommand{\R}[1]{$\mathbb{R}^{#1}$}
+\newcommand{\Vector}[1]{$\textbf{#1}$}
+\newcommand{\V}[1]{\textbf{\textit{#1}}}
+\newtheorem*{remark}{Remark}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{sol}
+{\emph{Solution:}
+}
+{
+	\qed
+}
+\specialcomment{com}{ \color{blue} \textbf{Comment:} }{\color{black}} %for instructor comments while grading
+\NewEnviron{probscore}{\marginpar{ \color{blue} \tiny Problem Score: \BODY \color{black} }}
+
 
 \begin{document}
 	\maketitle
 	\begin{abstract}
 		This chapter focuses on vector spaces and subspaces. Topics include vector spaces and subspaces such as the column space $C(A)$, nullspace $N(A)$, and the rest of the \emph{four subspaces}.
 	\end{abstract}
+
+
 \section{The Nullspace of A: Solving $A\textbf{x} = \textbf{0}$ and $R\textbf{x} = \textbf{0}$}
+	The nullspace is a subspace of matrix $A$ (square or rectangular) that contains all of the solutions to $A\textbf{x} = \textbf{0}$. A readily available solution to the system is the zero vector \Vector{Z}. Invertible matrices only have the zero vector as a solution while non-invertible matrices have nonzero solutions. \textbf{Each solution \Vector{x} belongs to the nullspace of $A$ which is in \R{n}.}
+		
+	\begin{problem}{1} 
+				Describe the nullspace of the singular matrix $A = \begin{bmatrix}
+																		1 & 2 \\
+																		3 & 6
+																		\end{bmatrix}$.
+	\end{problem}
+	
+	\begin{sol}
+		We produce the following from elimination: 
+		\begin{gather*}
+			A \V{x} = 0  \\
+			\begin{bmatrix}
+			1 & 2 \\
+			0 & 0 
+			\end{bmatrix}\begin{bmatrix}
+								x_1 \\
+								x_2
+						\end{bmatrix} =	\begin{bmatrix}
+												0 \\
+												0 
+											\end{bmatrix}
+			\intertext{\textbf{Elimination produces a single line}. This line is in the nullspace of $A$ and \textbf{contains all solutions ($x_1, x_2$)}. $x_2$ is a free variable. We choose $x_2 = 1$ as our special solution because all points on the line are multiples to it. From there, we get $x_1=-2$.}
+				\V{s} = \begin{bmatrix}
+						-2 \\
+						1
+						\end{bmatrix} \\
+			\intertext{Hence,}
+							A\V{s} = \begin{bmatrix}
+												1 & 2 \\
+												3 & 6
+											\end{bmatrix} \begin{bmatrix}
+															-2 \\
+															1
+															\end{bmatrix} = \begin{bmatrix}
+																					0 \\
+																					0
+																					\end{bmatrix} \\
+		\end{gather*}
+	\end{sol}
+
+	The nullspace of $A$ consists of all combinations of the special solutions to $A\V{x}=\textbf{0}$
+	
+	\begin{problem}{2} 
+		$x+2y+3z=0$ comes from the $1 \times 3$ matrix $\begin{bmatrix}
+															1 & 2 & 3
+														\end{bmatrix}$. Then $A\V{x}=\textbf{0}$ produces a plane. All vectors on the plane are perpendicular to $(1,2,3)$. \textbf{The plane is the nullspace of A}. There are 2 free variables $y$ and $z$: Set to $0$ and $1$.
+	\end{problem}
+
+	\begin{sol}
+			\begin{gather*}
+				A \V{x} = \begin{bmatrix}
+				1 & 2 & 3
+				\end{bmatrix} \begin{bmatrix}
+								x \\
+								y \\
+								z
+								\end{bmatrix} = 0
+				\intertext{We have two free variables $y$ and $z$, hence we have two special solutions. For $\textbf{\textit{v}}_1$, we choose $y=1$ and $z=0$.}
+					x + 2(1) + 3(0) = 0 \qquad \rightarrow \qquad x = -2 \\
+					\V{s}_1 = \begin{bmatrix}
+								-2 \\
+								1 \\
+								0
+							\end{bmatrix}
+				\intertext{For $\V{s}_2$, we choose $y=0$ and $z=1$. }
+					x + 2(0) + 3(1) = 0 \qquad \rightarrow \qquad x = -3 \\
+					\V{s}_2 = \begin{bmatrix}
+								-3 \\
+								0 \\
+								1
+								\end{bmatrix}
+				\intertext{Checking for $\V{s}_1$ and $\V{s}_2$,}
+					A \V{s}_1 = \begin{bmatrix}
+									1 & 2 & 3
+									\end{bmatrix} \begin{bmatrix}
+														-2 \\
+														1\\
+														0
+														\end{bmatrix} = -2 + 2 + 0 = 0 \\
+				A \V{s}_2 = \begin{bmatrix}
+								1 & 2 & 3
+								\end{bmatrix} \begin{bmatrix}
+												-3 \\
+												0 \\
+												1
+												\end{bmatrix} =	-3 + 0 + 3 = 0
+			\end{gather*}
+			The vectors $\V{s}_1, \V{s}_2$ lie on the plane $x + 2y + 3z=0$. All vectors on the plane are combinations of $\V{s}_1$ and $\V{s}_2$.
+	\end{sol}
+
+	\begin{remark}
+		There are two key steps in finding the nullspace of a matrix. 
+		\begin{enumerate}
+			\item Reducing $A$ to \textbf{row echelon form $R$}
+			\item Finding the special solutions to $A\V{x}=\textbf{0}$
+		\end{enumerate}
+	\end{remark}
+
+\subsection{Pivot Variables and Free Columns}
+	Free components correspond to columns with no pivots. The special choice (1 or 0) is only for the free variables in the special solutions.
+	
+		\begin{problem}{2} 
+			Find the nullspaces of the following matrices.
+			
+			\begin{gather*}
+					A =  \begin{bmatrix}
+							1 & 2 \\
+							3 & 8
+						  \end{bmatrix} \qquad  B =  \begin{bmatrix}
+													  A \\
+													  2A
+													  \end{bmatrix} =  \begin{bmatrix}
+																			  1 & 2 \\
+																			  3 & 8 \\
+																			  2 & 4 \\
+																			  6 & 16
+																			  \end{bmatrix} \qquad  C =  \begin{bmatrix}
+																											  A & 2A
+																											  \end{bmatrix} =  \begin{bmatrix}
+																																  1 & 2 & 2 & 4 \\
+																																  3 & 8 & 6 & 16
+																																  \end{bmatrix}
+			\end{gather*}
+
+	\end{problem}
+	
+	\begin{sol}
+		\begin{gather*}
+			\intertext{Elimination yields} 
+				\begin{bmatrix}
+					1 & 2 \\
+					0 & 2
+					\end{bmatrix} \begin{bmatrix}
+									x_1 \\
+									x_2
+									\end{bmatrix} = \begin{bmatrix}
+														0 \\
+														0
+														\end{bmatrix}
+			\intertext{$A$ is an invertible matrix, hence \V{x} = $\begin{bmatrix}
+																			0 \\
+																			0
+																			\end{bmatrix}$}
+		\end{gather*}
+	\end{sol}
+	
+	
 \end{document}
