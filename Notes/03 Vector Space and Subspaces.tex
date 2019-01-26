@@ -1,4 +1,4 @@
-\documentclass[letterpaper]{article}
+\documentclass[12pt, letterpaper]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amsthm,array, amssymb,amsfonts, enumitem, fancyhdr, color, comment, graphicx, environ}
 
@@ -11,8 +11,13 @@
 \newcommand{\R}[1]{$\mathbb{R}^{#1}$}
 \newcommand{\Vector}[1]{$\textbf{#1}$}
 \newcommand{\V}[1]{\textbf{\textit{#1}}}
-\newtheorem*{remark}{Remark}
 
+\newcommand{\A}{$A$}
+\newcommand{\x}{\textbf{\textit{x}}}
+\newcommand{\B}{\textbf{\textit{b}}}
+\newcommand{\system}{\textbf{\textit{\A \x = \B}}}
+
+\newtheorem*{remark}{Remark}
 \newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
 
 \newenvironment{problem}[2][Problem]{\begin{trivlist}
@@ -323,7 +328,7 @@
 		Many matrices only have one solution to $A\V{x} = 0$, the zero vector \V{Z}. The nullspaces of these matrices become $N(A)=\V{Z}$ without any special solutions. This case stresses the notion that $A$'s columns are \textbf{independent}. No combination of columns gives the zero vector except for the zero combination. All columns are pivots and there are no free columns. Below is another example.
 		
 		\begin{problem}{3}
-			What are the special solutions of the following matrix?
+			What are the special solutions of the following $4\times 5$ matrix?
 				$A = \left[\begin{array}{ccccc}
 				\vertbar & \vertbar &  \vertbar & \vertbar & \vertbar \\
 				p        &     p    &      f    &    p     &    f    \\
@@ -340,23 +345,239 @@
 								0 & 0 & 0 & \textbf{1}& e \\
 								0 & 0 & 0 & 0 &0
 								\end{bmatrix}
-				\intertext{There are only 2 free columns, therefore there are only 2 free variables. We will need $\V{s}_1 \text{and} \,\V{s}_2$. For \V{s}$_1$, we choose $x_3=1$ and $x_5=0$.}
+				\intertext{There are only 2 free columns, therefore there are only 2 free variables. We will need $\V{s}_1 \text{and} \,\V{s}_2$. For \V{s}$_1$, we choose $x_3=1$ and $x_5=0$. For \V{s}$_2$, we choose $x_3=0$ and $x_5=1$.}
 					\V{s}_1 = \begin{bmatrix}	
 									-a \\
 									-b \\
 									1 \\
 									0 \\
 									0
-									\end{bmatrix}
-				\intertext{For \V{s}$_2$, we choose $x_3=0$ and $x_5=1$.}
-										\V{s}_2= \begin{bmatrix}	
-													-c \\
-													-d \\
-													0 \\
-													-e \\
-													1
-													\end{bmatrix}
+									\end{bmatrix},
+									\qquad
+									\V{s}_2= \begin{bmatrix}	
+												-c \\
+												-d \\
+												0 \\
+												-e \\
+												1
+												\end{bmatrix}
 			\end{gather*}
 		\end{sol}
+	
+	\begin{remark}
+		The example above is a short wide matrix where $n>m$ (there are more columns than rows). These systems lead to at least 1 free variable. \textbf{There are exactly $n-m$ free variables if $n>m$}.	
+	\end{remark}
+
+\subsection{Rank of a Matrix}
+	\textbf{The \textit{size} of a matrix $A$ is the rank $r$}. The rank is the number of pivot columns in $A$. Elimination allows us to see the rank the matrix.
+	
+		\begin{gather*}
+			A = \begin{bmatrix}
+						1 & 1 & 2 & 4 \\
+						1 & 2 & 2 & 5 \\
+						1 & 3 & 2 & 6
+				\end{bmatrix} \rightarrow R = \begin{bmatrix}
+												1 & 0 & 2 & 3 \\
+												0 & 1 & 0 & 1 \\
+												0 & 0 & 0 & 0
+												\end{bmatrix}
+		\end{gather*}
+		
+		Here we see that column 2 is simply 2(column 1). Via elimination, we see that there are $2$ pivot columns (columns 1 and 2) and 2 free columns (columns 3 and 4). Hence, the rank of $A$ is 2.
+		
+\subsubsection{Rank One}
+	A rank one matrix has only one pivot column. When we use elimination, we see that every row is a multiple of the pivot row.
+	
+	\begin{gather*}
+			A = \begin{bmatrix}
+					1 & 3 & 10 \\
+					2 & 6 & 20 \\
+					3 & 9 & 30
+					\end{bmatrix} \rightarrow R = \begin{bmatrix}
+														1 & 3 & 10 \\
+														0 & 0 & 0 \\
+														0 & 0 & 0
+														\end{bmatrix}
+	\end{gather*}
+	
+	The column space of a rank-one matrix is ``one-dimensional." Here all columns are on the line through $\V{u}=(1,2,3)$. The columns of $A$ are $\V{u}, 3\V{u}$, and $10\V{u}$. We take the first row of $R$ into a row vector $v^T = \begin{bmatrix} 1 & 3 & 10 \end{bmatrix}$ and we have a special rank one form $A=\V{uv}^T$:
+				
+				\begin{gather*}
+					A = \V{uv}^T = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} \begin{bmatrix} 1 & 3 & 10 \end{bmatrix}
+				\end{gather*}
+				
+	With rank one, the system $A\V{x} = 0$ is easy to understand. From the equation above, we get $\V{u}(\V{v}^T \V{x})=0$ which leads us to $\V{v}^T \V{x} = 0$. This says that all vectors $\V{x}$ in the nullspace must be orthogonal to $\V{v}$ in the row space. Here are additional examples.
+	
+	
+	\begin{gather*}
+	A = \begin{bmatrix}
+			1 & 3 & 4 \\
+			2 & 6 & 8 
+			\end{bmatrix}, \qquad B = \begin{bmatrix}
+											0 & 3 \\
+											0 & 5
+											\end{bmatrix} \\
+	\intertext{For $A$,}
+		RREF(A) = \begin{bmatrix}
+					1 & 3 & 4 \\
+					0 & 0 & 0
+					\end{bmatrix} \\
+		A = \begin{bmatrix} 1\\ 2 \end{bmatrix} \begin{bmatrix} 1 & 3 & 4 \end{bmatrix} \\
+	\intertext{For $B$,}
+		RREF(B) = \begin{bmatrix}
+					0 & 1 \\
+					0 & 0
+					\end{bmatrix} \\
+		B = \begin{bmatrix} 3\\ 5 \end{bmatrix} \begin{bmatrix} 0 & 1 \end{bmatrix}
+	\end{gather*}
+	
+	The \textbf{rank is the number of independent columns and rows in} $A$. $A, U,$ and $R$ have $r$ independent columns and rows. The rank is also the dimension of the column space and rowspace. The nullspace has a dimension of $\V{n} - \V{r}$.
+	
+	
+\section{The Complete Solution to $A\V{x} = \V{b}$}
+	In this chapter, \V{b} is not zero. Which means that elimination also affects \V{b}. To make elimination easier, we make an augmented matrix by adding an extra column \V{b} to $A \rightarrow \begin{bmatrix} A & \V{b}\end{bmatrix}$.
+	
+		\begin{gather*}
+			A = \begin{bmatrix}
+			1&3&0&2\\
+			0&0&1&4\\
+			1&3&1&6
+			\end{bmatrix}, \qquad \V{b} = \begin{bmatrix} 1 & 6 & 7 \end{bmatrix} \\
+		\intertext{Augmented matrix:}
+			\begin{bmatrix} A & \V{b}\end{bmatrix} = \begin{bmatrix}
+														1&3&0&2 & \textbf{1}\\
+														0&0&1&4 & \textbf{6}\\
+														1&3&1&6 & \textbf{7}
+													\end{bmatrix}
+		\end{gather*}
+	
+	
+\subsection{One Particular Solution $A\V{x}_p = \V{b}$}
+	For an easy solution $\V{x}_p$, we choose $x_2$ and $x_4$ to be zero. Then the pivot variables $x_1$ and $x_3$ become $\V{b}$ ($x_1=1$ and $x_3=6$). Our particular solution becomes $\V{x}_p = (1,0,6,0)$
+	
+		\begin{gather*}
+			R\V{x}_p = \V{d} \\
+			\begin{bmatrix}
+					1&3&0&2\\
+					0&0&1&4\\
+					0&0&0&0
+				\end{bmatrix} \begin{bmatrix}\textbf{1} \\
+											  0 \\
+											  \textbf{6} \\
+											  0 \end{bmatrix} = \begin{bmatrix}
+											  						\textbf{1} \\ \textbf{6} \\ 0
+											  					\end{bmatrix}
+		\end{gather*} 
+	
+	
+	When the free variables are zero, the pivot variables for $\V{x}_p$ are readily seen in the right side vector $\V{d}$. There are 2 free variables in $A$, hence there are 2 special solutions $\V{s}_1, \V{s}_2$ to the nullspace.
+	
+	
+	\begin{gather*}
+		\V{s}_1 = \begin{bmatrix} -3 \\ 1\\ 0 \\ 0 \end{bmatrix}, \qquad \V{s}_2 = \begin{bmatrix} -2 \\ 0\\ -4 \\ 1 \end{bmatrix}
+	\intertext{The complete solution becomes:}
+		A \V{x} = \V{b}\\ 
+		A(\V{x}_p + \V{x}_n) = \begin{bmatrix}
+											1&3&0&2\\
+											0&0&1&4\\
+											0&0&0&0
+											\end{bmatrix} \left( x_2\begin{bmatrix} -3 \\ 1\\ 0 \\ 0 \end{bmatrix} + x_4\begin{bmatrix} -2 \\ 0\\ -4 \\ 1 \end{bmatrix} \right) = \begin{bmatrix}
+											\textbf{1} \\ \textbf{6} \\ 0
+											\end{bmatrix}
+	\intertext{Where $x_2$ and $x_4$ can be any real number.}
+	\end{gather*}
+	
+	The only solution to a full rank invertible matrix ($m=n=r$) is $\V{x}_p$ since there are no nullspace special solutions. Here $\V{x}_p = A^{-1}\V{b}$. The next example is with \textit{full column rank}.
+		\begin{gather*}
+			A = \begin{bmatrix}
+						1&1\\
+						1&2\\
+						-2&-3
+						\end{bmatrix}, \qquad \V{b} = \begin{bmatrix} b_1 & b_2 & b_3 \end{bmatrix}
+		\intertext{$\begin{bmatrix} A & \V{b}\end{bmatrix} \rightarrow \begin{bmatrix} R & \V{d}\end{bmatrix}$}
+			\begin{bmatrix} R & \V{d}\end{bmatrix} = \begin{bmatrix}
+																1 & 0 & \textbf{2b$_1$ - b$_2$}\\
+																0 & 1 & \textbf{b$_2$ - b$_1$}\\
+																0 & 0 & \textbf{b$_3$ + b$_1$ + b$_2$}
+																\end{bmatrix}
+		\end{gather*}
+		
+		This example has no free variables since $n-r=0$. This also means that the nullspace solution is $\V{x} = \textbf{0}$. $A$ has full column rank and all columns are pivot columns. The rank is $r=n$. The matrix is tall and thin ($m \ge n$). Row reduction puts $I$ at the top of $R$.
+		
+			$$R = \begin{bmatrix}
+					I \\ 0
+				\end{bmatrix} = \begin{bmatrix}
+									n \times n \text{ \,identity matrix}\\m - n \text{ \,rows of zeros}
+									\end{bmatrix}$$
+	
+	\noindent With full column rank, $A\V{x} = \V{b}$ has one solution or no solution ($m>n$ is an \textit{overdetermined} system). Here are some properties of full column rank matrices: 
+		\begin{enumerate}
+			\item All columns are pivot columns
+			\item There are no free variables or special solutions
+			\item The nullspace $N(A)$ contains only the zero vector.
+			\item If $A\V{x} = \V{b}$ has a solution (it might not) then it has only one solution $\V{x}_p$.
+		\end{enumerate}
+	
+	Another example is full row rank. $A\V{x} = \V{b}$ has \textit{one or infinitely many solutions}. $A$ is short and wide ($m \le n$). A matrix is full row rank if $r=m$. The rows are independent in this system and each row has a pivot.
+		\begin{gather*}
+			\intertext{This system $A\V{x}=\V{b}$ has $n=3$ unknowns but with only $m=2$ equations}
+				A = \begin{bmatrix}
+					1 & 1 & 1\\
+					1 & 2 & -1
+				\end{bmatrix}, \qquad \V{b} = \begin{bmatrix}
+												3 \\ 4
+												\end{bmatrix}
+			\intertext{$\begin{bmatrix} A & \V{b}\end{bmatrix} \rightarrow \begin{bmatrix} R & \V{d}\end{bmatrix}$. The form of $R$ is $\begin{bmatrix} I & F\end{bmatrix}$ where $F$ is/are the free column/s:}
+				\begin{bmatrix} R & \V{d}\end{bmatrix} = \begin{bmatrix}
+															1 & 0 & 3 & \textbf{2}\\
+															0 & 1 & -2 & \textbf{1}
+														\end{bmatrix}
+			\intertext{We find $\V{x}_p$ from $\V{b}$:}
+				\V{x}_p = \begin{bmatrix}
+								2 \\ 1 \\ 0
+							\end{bmatrix}
+			\intertext{There is 1 free column, hence $x_3$ is a free variable}
+				\V{s}_1 = \begin{bmatrix}
+								-3 \\ 2 \\ 1
+							\end{bmatrix}
+			\intertext{Hence, the complete solution is:}
+				A\V{x} = A(\V{x}_p + \V{x}_n) = \V{b} \\
+				\begin{bmatrix}
+				1 & 1 & 1\\
+				1 & 2 & -1
+				\end{bmatrix}\left(\begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix} + x_3 \begin{bmatrix} -3 \\ 2 \\ 1 \end{bmatrix} \right) = \begin{bmatrix}
+																																			3 \\ 4
+																																			\end{bmatrix}
+			\intertext{Where $x_3$ is any arbitrary constant.}
+		\end{gather*}
+		
+		\noindent A matrix with full row rank ($r=m$) has all these properties:
+			\begin{enumerate}
+				\item All rows have pivots, and $R$ has no zeros
+				\item $A\V{x} = \V{b}$ has a solution for every right side $\V{b}$
+				\item The column space is the whole space \R{m}
+				\item There are $n - r = n - m$ special solutions in the nullspace of $A.$
+			\end{enumerate}
+\subsection{The Complete Solution}
+	To summarize, 
+	$$
+	\begin{array}{llcl}
+		\V{r} = \V{m}, \V{r}=\V{n} & \text{Square and invertible} & \system  & \text{Has one solution (nullspace = \V{Z})}\\
+		\V{r}=\V{m}, r<n &  \text{Short and wide (underdetermined)} & \system & \text{Has $\infty$ solutions}\\
+		r<m, \V{r}=\V{n} &  \text{Tall and thin (overdetermined)} & \system & \text{Has 0 or 1 solution}\\
+		r<m, r<n &  \text{Not full rank} & \system & \text{Has 0 or $\infty$ solutions}
+	\end{array} 
+	$$
+	
+	\noindent \A\, is the same as $R$ since their column space and nullspace are the same. 
+	$$
+	\begin{array}{lcccc}
+		\text{Four types of $R$} & \begin{bmatrix} I \end{bmatrix}  & \begin{bmatrix} I & F \end{bmatrix} & \begin{bmatrix} I \\ 0 \end{bmatrix} & \begin{bmatrix} I & F \\ 0 & 0 \end{bmatrix}\\
+		\text{Their ranks} & r = m = n & r = m < n & r = n < m & r < m, r < n
+	\end{array} 
+	$$
+	
+	
+	
 	
 \end{document}
