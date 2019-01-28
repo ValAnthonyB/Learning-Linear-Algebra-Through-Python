@@ -16,8 +16,14 @@
 \newcommand{\x}{\textbf{\textit{x}}}
 \newcommand{\B}{\textbf{\textit{b}}}
 \newcommand{\system}{\textbf{\textit{\A \x = \B}}}
+\newcommand{\nullsystem}{\textbf{\textit{\A \x = 0}}}
 
 \newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}
+
+
 \newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
 
 \newenvironment{problem}[2][Problem]{\begin{trivlist}
@@ -576,6 +582,117 @@
 		\text{Their ranks} & r = m = n & r = m < n & r = n < m & r < m, r < n
 	\end{array} 
 	$$
+
+\section{Independence, Basis, and Dimension}
+	The true dimension of the column space of $A$ is measured by counting the number of independent columns which is the rank $r$. Basis vectors are independent vectors that \textbf{span} the space and this means that every vector in the space is a unique combination of the basis vectors.
+	
+	
+\subsection{Linear Independence}
+		\begin{definition}
+			The columns of $A$ are linearly independent when the only solution to $\nullsystem$ is $\V{x} = \textbf{0}$. No other combination $A\V{x}$ gives the zero vector.
+		\end{definition}
+	
+		The columns are independent when the nullspace $N(A)$ contains only the zero vector.
+	
+		\begin{definition}
+			The sequence of vectors $\V{v}_1, \V{v}_2, \ldots \V{v}_n$ is linearly dependent if the only combination that gives the zero vector is $0\V{v}_1 + 0\V{v}_2 + \ldots 0\V{v}_n$. If the combination $A\V{x}$ gives \textbf{0} when the $x$'s are not all zero, the vectors are dependent.
+			
+			\begin{gather*}
+				x_1 \V{v}_1+ x_2 \V{v}_2 + \ldots + x_n \V{v}_n = \textbf{0} \quad \text{only happens when all $x$'s are zero.}
+			\end{gather*}
+		\end{definition}
+	
+	A way to describe linear dependence is: ``\textit{One vector is a combination of other vectors}." 	
+	
+\subsection{Vectors that Span a Subspace}
+		The column space is spanned by the columns of a matrix. The columns of a matrix span its column space and they might be dependent or independent.
+					\begin{definition}
+						A set of vectors \textbf{\textit{spans}} a space if their linear combinations fill the space.
+					\end{definition}
+		
+				
+					\begin{example}
+						\begin{gather*}
+							\V{v}_1 = \begin{bmatrix}1 \\ 0 \end{bmatrix} \quad \text{and} \quad \V{v}_2 = \begin{bmatrix}0 \\ 1 \end{bmatrix} \text{span the full 2-D space \R{2}}
+						\end{gather*}
+					\end{example}
+				
+					\begin{example}
+						\begin{gather*}
+							\V{v}_1 = \begin{bmatrix}1 \\ 0 \end{bmatrix}, \quad \V{v}_2 = \begin{bmatrix}0 \\ 1 \end{bmatrix} \quad \text{and} \quad \V{v}_3 = \begin{bmatrix}4\\ 7 \end{bmatrix} \text{also span the full 2-D space \R{2}}
+						\end{gather*}
+					\end{example}
+				
+					\begin{example}
+						\begin{gather*}
+							\V{w}_1 = \begin{bmatrix}1 \\ 1 \end{bmatrix} \text{and} \quad \V{w}_2 = \begin{bmatrix}-1 \\ -1 \end{bmatrix} \text{only span a line in \R{2}. So does $\V{w}_1$ by itself.}
+						\end{gather*}
+					\end{example}
+	
+	
+		
+	\noindent The combinations of the rows produce the ``\textbf{\textit{row space}}."
+		\begin{definition}
+			The row space of a matrix is the subspace \R{n} spanned by the rows.
+				\begin{gather*}
+					\text{\textbf{The row space of $A$ is $C(A^T)$. It is the column space of $A^T$}}
+				\end{gather*}
+		\end{definition}
+	
+				\begin{example}
+					Describe the column space and row space of $A$.
+					\begin{gather*}
+					A = \begin{bmatrix}1&4\\ 2&7 \\ 3&5 \end{bmatrix} \quad \text{and} \quad A^T = \begin{bmatrix}1&2&3 \\ 4&7&5\end{bmatrix}
+					\end{gather*}
+					
+					The $C(A)$ is the plane in \R{3} spanned by the two columns of $A$. The $C(A^T)$ is spanned by the three rows of $A$. This row space is all of \R{2}. Remember: \textit{The rows are in \R{n} spanning the row space, while the columns are in \R{m} spanning the column space.}
+				\end{example}
+	
+	
+	
+	
+\subsection{A Basis for a Vector Space}
+		Two vectors can't span all of \R{3}, even if they are independent (because they only span a plane). Four vectors can't be independent, even if they span \R{3}. We want enough independent vectors to span the space (no more no less). A ``\textbf{basis}" is just right. The basis vectors are linearly independent vectors.
+		
+			 
+			 \begin{example}
+			 	What are the basis vectors for $I = \begin{bmatrix} 1 & 0 \\ 0 & 1\end{bmatrix}$.
+			 	\begin{gather*}
+			 		\intertext{$I$ is already in RREF. Hence the column are the basis vectors.}
+			 			\V{i} =  \begin{bmatrix} 1 \\ 0\end{bmatrix} \text{and } \V{j} =  \begin{bmatrix} 0 \\ 1\end{bmatrix} \text{are the basis vectors for $I$. These vectors span \R{2}.}
+			 	\end{gather*}
+			 	If this were a $3 \times 3$ full rank matrix, we would have 3 basis vectors $\V{i}, \V{j}, \text{and } \V{k}$
+			 \end{example}
+	
+	
+		\begin{definition}
+			\textbf{The pivot columns of $A$ are a basis for its column space. The pivot rows of $A$ are a basis for its row space and so are the pivot rows of its echelon form $R$.}
+		\end{definition}
+	
+		\begin{example}
+			What are the basis vectors for $C(A) \text{and } C(A^T)$?
+				$$\begin{bmatrix} 2 & 4 \\ 3 & 6 \end{bmatrix}$$
+				
+				\begin{gather*}
+					\intertext{A $\rightarrow$ R:}
+						R = \begin{bmatrix} 1 & 2 \\ 0 & 0 \end{bmatrix}
+				\end{gather*}
+			
+			\noindent Hence the basis for the column space is the pivot column of $A$.
+				\begin{equation*}
+					\text{Basis for } C(A) = \begin{bmatrix} 2 \\ 3 \end{bmatrix}
+				\end{equation*}
+				
+			\noindent The basis for the row space is the pivot row in $R$.
+				\begin{equation*}
+					\text{Basis for } C(A^T) = \begin{bmatrix} 1 \\ 2 \end{bmatrix}
+				\end{equation*}
+		\end{example}
+	
+	
+		\begin{definition}
+			The dimension of a space is the number of vectors in a basis.
+		\end{definition}
 	
 	
 	
