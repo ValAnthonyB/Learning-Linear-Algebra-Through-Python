@@ -16,7 +16,9 @@
 \newcommand{\x}{\textbf{\textit{x}}}
 \newcommand{\B}{\textbf{\textit{b}}}
 \newcommand{\system}{\textbf{\textit{\A \x = \B}}}
-\newcommand{\nullsystem}{\textbf{\textit{\A \x = 0}}}
+\newcommand{\nullsystem}{\textbf{\textit{\A\x}} = \textbf{0}}
+\newcommand{\DefinitionSpace}{\vspace{15px}}
+
 
 \newtheorem*{remark}{Remark}
 \theoremstyle{definition}
@@ -44,100 +46,224 @@
 		This chapter focuses on vector spaces and subspaces. Topics include vector spaces and subspaces such as the column space $C(A)$, nullspace $N(A)$, and the rest of the \emph{four subspaces}.
 	\end{abstract}
 
+\section{Spaces of Vectors}
+	\R{1}, \R{2}, \R{3},\ldots, \R{n} are the most important vector spaces. Each space \R{n} consists of a whole collection of vectors. \R{5} contains all column vectors with five components (5-D space).
+	
+		\DefinitionSpace
+			\begin{definition}
+				The space \R{n} consists of all column vectors \V{v} with $n$ components.
+			\end{definition} 	
+		\DefinitionSpace
+		
+		The components in \V{v} are real numbers, which is the reason for the letter $\mathbb{R}$. A vector whose $n$ components are complex numbers lies in the space $\mathbb{C}^n$. The vector space \R{2} is represented by the usual $xy$ plane. This plane is composed of all the vectors living in the vector space. Similarly the vectors in \R{3} correspond to points $(x,y,z)$ in 3-D space. The one-dimensional space \R{1} is a line (like the $x$ axis). We represent vectors as a column between brackets, or along a line using commas and parentheses. 
+			
+				\begin{gather}
+					\begin{bmatrix} 4 \\ \pi\end{bmatrix} \text{ is in \R{2},\quad} (1,1,0,1,1) \text{ is in \R{5},\quad} \begin{bmatrix} 1+i \\ 1-i\end{bmatrix} \text{is in $\mathbb{C}^2$} 
+				\end{gather}
+			
+			\DefinitionSpace
+				\begin{definition}
+					We can add any vectors in \R{n}, and we can multiply any vector \V{v} by scalar $c$ and the result stays in the vector space.
+				\end{definition} 	
+			\DefinitionSpace
+			
+				\noindent Here are three vector spaces other than \R{n}:
+			\begin{description}[labelindent=2\parindent]
+				\item[$\mathbb{M}$] The vector space of all real $2\times2$ matrices
+				\item[$\mathbb{M}$] The vector space of all real functions $f(x)$
+				\item[$\mathbb{Z}$] The vector space that consists only of a zero vector
+			\end{description}
+			
+				
+\subsection{Subspaces}
+	The most important vectors in this chapter are column vectors with $n$ components. \textbf{Vectors inside the vector space \R{n} are subspaces of \R{n}}. Consider the \R{3} space. Choose a plane through the origin $(0,0,0)$. That plane is a vector space in its own right. If we add any two arbitrary vectors in the plane, their sum is still in the plane. If we multiply a vector in the plane by an arbitrary constant, the result is still in the vector subspace. \textbf{The plane in \R{3} is not \R{2} even though it looks like \R{2}}. This is because the vectors in the plane have 3 components. The plane is a vector space inside \R{3}. The most important detail about subspaces is that \textbf{all linear combinations of vectors inside the subspace stay in the subspace}. 
+		
+		\DefinitionSpace
+			\begin{definition}
+				A subspace of a vector space is a set of vectors, including the zero vector \textbf{0}, that satisfies two requirements: \textbf{\textit{If $\V{v}$ and $\V{w}$ are vectors in the subspace and $c$ is any scalar, then}}
+				
+				\renewcommand{\theenumi}{\roman{enumi}}
+				\begin{enumerate}[leftmargin=2\parindent]
+					\item $\V{v}+\V{w}$ is in the subspace
+					\item $c\V{v}$ is in the subspace
+				\end{enumerate}	
+			\end{definition} 	
+		\DefinitionSpace
+	
+	\noindent Vector addition and scalar multiplication in vector spaces must obey the following rules:
+		\begin{enumerate}[leftmargin=2\parindent]
+			\item $\V{x} + \V{y} = \V{y} + \V{x}$ 
+			\item $\V{x} + (\V{y} + \V{z}) = (\V{x} + \V{y}) + \V{z}$ 
+			\item There is a unique ``zero vector" such that $\V{x}+\textbf{0}=\V{x}$
+			\item For each $\V{x}$ there is a unique vector $-\V{x}$ such that $\V{x} + (-\V{x}) = \textbf{0}$
+			\item $1$ times $\V{x}$ equals $\V{x}$
+			\item $(c_1 c_2) \V{x} = c_1(c_2 \V{x})$
+			\item $c(\V{x} + \V{y}) = c\V{x} + c\V{y}$
+			\item $(c_1 + c_2)\V{x} = c_1\V{x} + c_2\V{y}$
+		\end{enumerate}
+	
+	All subspaces must contain the zero vector. A plane that goes through (0,0,0) in \R{3}. A line that also goes through the origin is a subspace. Another subspace is \R{3} itself. Here is a list of other subspaces in \R{3}: 
+		\begin{description}[labelindent=2\parindent]
+			\item[$\textbf{L}$ any line that goes through $(0,0,0)$]
+			\item[$\textbf{P}$ any plane that goes through $(0,0,0)$]
+			\item[\R{3} itself]
+			\item[$\textbf{Z} = (0,0,0) $]
+		\end{description}		
+
+		\DefinitionSpace
+	\begin{definition}
+		A subspace containing arbitrary vectors \V{v} and \V{w} must contain all linear combinations $c\V{v} + d\V{w}$.
+	\end{definition} 	
+		\DefinitionSpace
+	
+	\noindent Keeping a part of a line or plane will not satisfy the requirements for a subspace. Here are examples:
+		\begin{example}
+			Keep only the vectors $(x,y)$ whose components are positive or zero (a quarter plane). The vector $(2,3)$ are included but $(-2,-3)$ is not. This quarter plane is not a subspace.
+		\end{example}
+	
+	
+	
+\section{Column Space of $A$}
+	We are trying to solve for $A\V{x} = \V{b}$. If $A$ is not invertible, then it is solvable for some $\V{b}$'s but not for all $\V{b}$'s. We want to describe these good $\V{b}$'s. Those $\V{b}$'s form the column space of $A$. The column space is a vector space made up of column vectors.
+	
+	
+	\DefinitionSpace
+		\begin{definition}
+			The column space consists of all linear combinations of the columns. The combinations are all possible vectors $A\V{x}$. They fill the entire column space $C(A)$.
+		\end{definition} 	
+	\DefinitionSpace
+
+	The column space is important. To solve $A\V{x} = \V{b}$ is to express \V{b} as a combination of the columns. The right side \V{b} has to be in the column space produced by $A$ on the left side. If \V{b} cannot be expressed as a combination of $A\V{x}$, then it is not in the column space of $A$.
+
+	\DefinitionSpace
+		\begin{definition}
+			The system $A\V{x} = \V{b}$ is solvable if and only if\V{b} is in the column space of $A$.
+		\end{definition} 	
+	\DefinitionSpace
+
+	The columns in $A$ belong to \R{m}. The column space of $A$ is a subspace of \R{m}. The set of all column combinations $A\V{x}$ satisfies rule (\textbf{i}) and (\textbf{ii}) for a subspace. 
+
+	\DefinitionSpace
+		\begin{example}
+			Describe the column space of $A$.
+				\begin{gather*}
+					A\V{x} = \begin{bmatrix} 1&0 \\ 4&3 \\2&3 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+				\intertext{Which is also:}
+					x_1 \begin{bmatrix} 1 \\ 4 \\ 2 \end{bmatrix} + x_2\begin{bmatrix} 0 \\ 3 \\ 3  \end{bmatrix}
+				\end{gather*}
+			The column space of $A$ is a plane with zero thickness in \R{3}. Most right sides \V{b} won't be solutions to $A\V{x}$. The attainable right sides \V{b} are exactly the vectors in the column space. \textbf{The whole subspace is generated by all of the combinations of the two columns in $A$}. 
+		\end{example}
+	\DefinitionSpace
+	
+	
+	\DefinitionSpace
+		\begin{example}
+			Describe the column space of $I, A$ and $B$.
+			\begin{gather*}
+				I = \begin{bmatrix} 1&0 \\ 4&3 \\2&3 \end{bmatrix} \quad A = \begin{bmatrix} 1&2 \\ 2&4 \end{bmatrix} \quad B = \begin{bmatrix} 1&2&3 \\ 0&0&4 \end{bmatrix}
+			\end{gather*}
+			
+			\noindent The column space of $I$ is the whole \R{2}. Every vector is a combination of the columns $I$. $C(I)$ is \R{2}. \\ \\
+			
+			The column space of $A$ is only line since the second row is $2 \times$ row 1. The column space contains $\begin{bmatrix} 1 & 2 \end{bmatrix}^T$ and all other multiples of the said column. The system $A\V{x} = \V{b}$ is only solvable when \V{b} is on the line. \\\\
+			
+			The column space of $B$ is the entire \R{2} space since any \V{b} is attainable from the combinations of the columns.
+			
+		\end{example}
+	\DefinitionSpace
+	
 
 \section{The Nullspace of A: Solving $A\textbf{x} = \textbf{0}$ and $R\textbf{x} = \textbf{0}$}
 	The nullspace is a subspace of matrix $A$ (square or rectangular) that contains all of the solutions to $A\textbf{x} = \textbf{0}$. A readily available solution to the system is the zero vector \Vector{Z}. Invertible matrices only have the zero vector as a solution while non-invertible matrices have nonzero solutions. \textbf{Each solution \Vector{x} belongs to the nullspace of $A$ which is in \R{n}.}
 		
-	\begin{problem}{1} 
+	\begin{example}
 				Describe the nullspace of the singular matrix $A = \begin{bmatrix}
 																		1 & 2 \\
 																		3 & 6
 																		\end{bmatrix}$.
-	\end{problem}
+				We produce the following from elimination: 
+				\begin{gather*}
+					A \V{x} = 0  \\
+					\begin{bmatrix}
+					1 & 2 \\
+					0 & 0 
+					\end{bmatrix}\begin{bmatrix}
+									x_1 \\
+									x_2
+									\end{bmatrix} =	\begin{bmatrix}
+															0 \\
+															0 
+															\end{bmatrix}
+				\intertext{\textbf{Elimination produces a single line}. This line is in the nullspace of $A$ and \textbf{contains all solutions ($x_1, x_2$)}. $x_2$ is a free variable. We choose $x_2 = 1$ as our special solution because all points on the line are multiples to it. From there, we get $x_1=-2$.}
+					\V{s} = \begin{bmatrix}
+								-2 \\
+								1
+								\end{bmatrix} \\
+				\intertext{Hence,}
+					A\V{s} = \begin{bmatrix}
+								1 & 2 \\
+								3 & 6
+								\end{bmatrix} \begin{bmatrix}
+												-2 \\
+												1
+												\end{bmatrix} = \begin{bmatrix}
+																	0 \\
+																	0
+																	\end{bmatrix} \\
+				\end{gather*}
+		The nullspace of $A$ consists of all combinations of the special solutions to $A\V{x}=\textbf{0}$
+	\end{example}
 	
-	\begin{sol}
-		We produce the following from elimination: 
-		\begin{gather*}
-			A \V{x} = 0  \\
-			\begin{bmatrix}
-			1 & 2 \\
-			0 & 0 
-			\end{bmatrix}\begin{bmatrix}
-								x_1 \\
-								x_2
-						\end{bmatrix} =	\begin{bmatrix}
-												0 \\
-												0 
-											\end{bmatrix}
-			\intertext{\textbf{Elimination produces a single line}. This line is in the nullspace of $A$ and \textbf{contains all solutions ($x_1, x_2$)}. $x_2$ is a free variable. We choose $x_2 = 1$ as our special solution because all points on the line are multiples to it. From there, we get $x_1=-2$.}
-				\V{s} = \begin{bmatrix}
-						-2 \\
-						1
-						\end{bmatrix} \\
-			\intertext{Hence,}
-							A\V{s} = \begin{bmatrix}
-												1 & 2 \\
-												3 & 6
-											\end{bmatrix} \begin{bmatrix}
-															-2 \\
-															1
-															\end{bmatrix} = \begin{bmatrix}
-																					0 \\
-																					0
-																					\end{bmatrix} \\
-		\end{gather*}
-	\end{sol}
 
-	The nullspace of $A$ consists of all combinations of the special solutions to $A\V{x}=\textbf{0}$
 	
-	\begin{problem}{2} 
+	
+	\begin{example} 
 		$x+2y+3z=0$ comes from the $1 \times 3$ matrix $\begin{bmatrix}
 															1 & 2 & 3
 														\end{bmatrix}$. Then $A\V{x}=\textbf{0}$ produces a plane. All vectors on the plane are perpendicular to $(1,2,3)$. \textbf{The plane is the nullspace of A}. There are 2 free variables $y$ and $z$: Set to $0$ and $1$.
-	\end{problem}
-
-	\begin{sol}
-			\begin{gather*}
-				A \V{x} = \begin{bmatrix}
-				1 & 2 & 3
-				\end{bmatrix} \begin{bmatrix}
-								x \\
-								y \\
-								z
-								\end{bmatrix} = 0
-				\intertext{We have two free variables $y$ and $z$, hence we have two special solutions. For $\textbf{\textit{v}}_1$, we choose $y=1$ and $z=0$.}
-					x + 2(1) + 3(0) = 0 \qquad \rightarrow \qquad x = -2 \\
-					\V{s}_1 = \begin{bmatrix}
-								-2 \\
-								1 \\
-								0
-							\end{bmatrix}
-				\intertext{For $\V{s}_2$, we choose $y=0$ and $z=1$. }
-					x + 2(0) + 3(1) = 0 \qquad \rightarrow \qquad x = -3 \\
-					\V{s}_2 = \begin{bmatrix}
-								-3 \\
-								0 \\
-								1
-								\end{bmatrix}
-				\intertext{Checking for $\V{s}_1$ and $\V{s}_2$,}
-					A \V{s}_1 = \begin{bmatrix}
-									1 & 2 & 3
-									\end{bmatrix} \begin{bmatrix}
-														-2 \\
-														1\\
-														0
-														\end{bmatrix} = -2 + 2 + 0 = 0 \\
-				A \V{s}_2 = \begin{bmatrix}
+														
+		\begin{gather*}
+					A \V{x} = \begin{bmatrix}
 								1 & 2 & 3
 								\end{bmatrix} \begin{bmatrix}
-												-3 \\
-												0 \\
-												1
-												\end{bmatrix} =	-3 + 0 + 3 = 0
-			\end{gather*}
-			The vectors $\V{s}_1, \V{s}_2$ lie on the plane $x + 2y + 3z=0$. All vectors on the plane are combinations of $\V{s}_1$ and $\V{s}_2$.
-	\end{sol}
+													x \\
+													y \\
+													z
+													\end{bmatrix} = 0
+				\intertext{We have two free variables $y$ and $z$, hence we have two special solutions. For $\textbf{\textit{v}}_1$, we choose $y=1$ and $z=0$.}
+						x + 2(1) + 3(0) = 0 \qquad \rightarrow \qquad x = -2 \\
+						\V{s}_1 = \begin{bmatrix}
+										-2 \\
+										1 \\
+										0
+										\end{bmatrix}
+				\intertext{For $\V{s}_2$, we choose $y=0$ and $z=1$. }
+						x + 2(0) + 3(1) = 0 \qquad \rightarrow \qquad x = -3 \\
+						\V{s}_2 = \begin{bmatrix}
+									-3 \\
+									0 \\
+									1
+									\end{bmatrix}
+				\intertext{Checking for $\V{s}_1$ and $\V{s}_2$,}
+						A \V{s}_1 = \begin{bmatrix}
+										1 & 2 & 3
+										\end{bmatrix} \begin{bmatrix}
+										-2 \\
+										1\\
+										0
+										\end{bmatrix} = -2 + 2 + 0 = 0 \\
+						A \V{s}_2 = \begin{bmatrix}
+										1 & 2 & 3
+										\end{bmatrix} \begin{bmatrix}
+										-3 \\
+										0 \\
+										1
+										\end{bmatrix} =	-3 + 0 + 3 = 0
+		\end{gather*}
+		The vectors $\V{s}_1, \V{s}_2$ lie on the plane $x + 2y + 3z=0$. All vectors on the plane are combinations of $\V{s}_1$ and $\V{s}_2$.
+	\end{example}
 
+\DefinitionSpace
 	\begin{remark}
 		There are two key steps in finding the nullspace of a matrix. 
 		\begin{enumerate}
@@ -145,11 +271,12 @@
 			\item Finding the special solutions to $A\V{x}=\textbf{0}$
 		\end{enumerate}
 	\end{remark}
+\DefinitionSpace
 
 \subsection{Pivot Variables and Free Columns}
 	Free components correspond to columns with no pivots. The special choice (1 or 0) is only for the free variables in the special solutions.
 	
-		\begin{problem}{2} 
+		\begin{example} 
 			Find the nullspaces of the following matrices.
 			
 			\begin{gather*}
@@ -171,137 +298,134 @@
 																																  3 & 8 & 6 & 16
 																																  \end{bmatrix}
 			\end{gather*}
-
-	\end{problem}
-	
-	\begin{sol}
-		\begin{gather*}
+			\begin{gather*}
 			\intertext{Elimination with $A$ yields} 
-					A =  \begin{bmatrix}
-								1 & 2 \\
-								3 & 8
-								\end{bmatrix} \rightarrow U\V{x} = \begin{bmatrix}
-													1 & 2 \\
-													0 & 2
-													\end{bmatrix} \begin{bmatrix}
-																	x_1 \\
-																	x_2
-																	\end{bmatrix} = \begin{bmatrix}
-																						0 \\
-																						0
-																						\end{bmatrix}
+			A =  \begin{bmatrix}
+			1 & 2 \\
+			3 & 8
+			\end{bmatrix} \rightarrow U\V{x} = \begin{bmatrix}
+			1 & 2 \\
+			0 & 2
+			\end{bmatrix} \begin{bmatrix}
+			x_1 \\
+			x_2
+			\end{bmatrix} = \begin{bmatrix}
+			0 \\
+			0
+			\end{bmatrix}
 			\intertext{$A$ is an invertible matrix, hence \V{x} = $\begin{bmatrix}
-																			0 \\
-																			0
-																			\end{bmatrix}$. On to $B$.}
-					 B = \begin{bmatrix}
-						1 & 2 \\
-						3 & 8 \\
-						2 & 4 \\
-						6 & 16
-					\end{bmatrix} 	\rightarrow \begin{bmatrix}
-													1 & 2 \\
-													0 & 2 \\
-													2 & 4 \\
-													6 & 16
-													\end{bmatrix} \rightarrow \begin{bmatrix}
-																					1 & 2 \\
-																					0 & 2 \\
-																					0 & 0 \\
-																					0 & 4
-																					\end{bmatrix} \rightarrow \begin{bmatrix}
-																													1 & 2 \\
-																													0 & 2 \\
-																													0 & 0 \\
-																													0 & 0
-																													\end{bmatrix} \\
-				U\V{x} = \begin{bmatrix}
-				1 & 2 \\
-				0 & 2 \\
-				0 & 0 \\
-				0 & 0
-				\end{bmatrix} \begin{bmatrix}
-									x_1 \\
-									x_2 
-									\end{bmatrix} = \begin{bmatrix}
-														0 \\
-														0 \\
-														0\\ 
-														0
-														\end{bmatrix}
-				\intertext{The first two rows do not have special solutions other than the trivial zero vector. The 3rd and 4th rows are dependent on the 1st and 2nd rows, respectively which would become zero rows when we do elimination. The nullspace is \V{x} = $\begin{bmatrix}
-																													0 \\
-																													0
-																													\end{bmatrix}$. On to $C$.}
-				C = \begin{bmatrix}
-						1 & 2 & 2 & 4 \\
-						3 & 8 & 6 & 16
-						\end{bmatrix} \rightarrow  \begin{bmatrix}
-													1 & 2 & 2 & 4 \\
-													0 & 2 & 0 & 4
-													\end{bmatrix} \\
-				U\V{x} = \begin{bmatrix}
-				1 & 2 & 2 & 4 \\
-				0 & 2 & 0 & 4
-				\end{bmatrix} \begin{bmatrix}
-								x_1 \\
-								x_2 \\
-								x_3 \\
-								x_4
-								\end{bmatrix} = \begin{bmatrix}
-														0 \\
-														0
-														\end{bmatrix}
-				\intertext{The first two columns above are called the ``\textit{pivot columns}" while the last two rows are called ``\textit{free columns}." We will have two special solutions since there are two free variables $x_3$ and $x_4$. For \V{s}$_1$, we choose $x_3=1$ and $x_4=0$.}
-				    U \V{s}_1 = \textbf{0} \\ 
-				    \begin{bmatrix}
-					    1 & 2 & 2 & 4 \\
-					    0 & 2 & 0 & 4
-					    \end{bmatrix} \begin{bmatrix}
-										    x_1 \\
-										    x_2 \\
-										    1 \\
-										    0
-										    \end{bmatrix} = \textbf{0} \\
-				\intertext{From row 2,}
-						0 + 2x_2 + 0 + 0 = 0\\
-				\intertext{From row 1,}
-						x_1 + 0 + 2 + 0 = 0 \\
-						x_1 = -2 \\
-				\intertext{Hence,}
-					\boxed{\V{s}_1 = \begin{bmatrix}
-											-2 \\
-											0 \\
-											1 \\
-											0
-											\end{bmatrix}}
-				\intertext{We do the same for \V{s}$_2$, but $x_3=0$ and $x_4=1$}
-					U \V{s}_2 = \textbf{0} \\ 
-					\begin{bmatrix}
-					1 & 2 & 2 & 4 \\
-					0 & 2 & 0 & 4
-					\end{bmatrix} \begin{bmatrix}
-									x_1 \\
-									x_2 \\
-									0\\
-									1
-									\end{bmatrix} = \textbf{0} \\
-				\intertext{From row 2,}
-					0 + 2x_2 + 0 + 4 = 0\\
-					x_2 = -2
-				\intertext{From row 1,}
-					x_1 + -4 + 0 + 4 = 0 \\
-					x_1 = 0 \\
-				\intertext{Hence,}
-					\boxed{					
-					\V{s}_2 = \begin{bmatrix}	
-									0 \\
-									-2 \\
-									0\\
-									1
-									\end{bmatrix}}
-		\end{gather*}
-	\end{sol}
+				0 \\
+				0
+				\end{bmatrix}$. On to $B$.}
+			B = \begin{bmatrix}
+			1 & 2 \\
+			3 & 8 \\
+			2 & 4 \\
+			6 & 16
+			\end{bmatrix} 	\rightarrow \begin{bmatrix}
+			1 & 2 \\
+			0 & 2 \\
+			2 & 4 \\
+			6 & 16
+			\end{bmatrix} \rightarrow \begin{bmatrix}
+			1 & 2 \\
+			0 & 2 \\
+			0 & 0 \\
+			0 & 4
+			\end{bmatrix} \rightarrow \begin{bmatrix}
+			1 & 2 \\
+			0 & 2 \\
+			0 & 0 \\
+			0 & 0
+			\end{bmatrix} \\
+			U\V{x} = \begin{bmatrix}
+			1 & 2 \\
+			0 & 2 \\
+			0 & 0 \\
+			0 & 0
+			\end{bmatrix} \begin{bmatrix}
+			x_1 \\
+			x_2 
+			\end{bmatrix} = \begin{bmatrix}
+			0 \\
+			0 \\
+			0\\ 
+			0
+			\end{bmatrix}
+			\intertext{The first two rows do not have special solutions other than the trivial zero vector. The 3rd and 4th rows are dependent on the 1st and 2nd rows, respectively which would become zero rows when we do elimination. The nullspace is \V{x} = $\begin{bmatrix}
+				0 \\
+				0
+				\end{bmatrix}$. On to $C$.}
+			C = \begin{bmatrix}
+			1 & 2 & 2 & 4 \\
+			3 & 8 & 6 & 16
+			\end{bmatrix} \rightarrow  \begin{bmatrix}
+			1 & 2 & 2 & 4 \\
+			0 & 2 & 0 & 4
+			\end{bmatrix} \\
+			U\V{x} = \begin{bmatrix}
+			1 & 2 & 2 & 4 \\
+			0 & 2 & 0 & 4
+			\end{bmatrix} \begin{bmatrix}
+			x_1 \\
+			x_2 \\
+			x_3 \\
+			x_4
+			\end{bmatrix} = \begin{bmatrix}
+			0 \\
+			0
+			\end{bmatrix}
+			\intertext{The first two columns above are called the ``\textit{pivot columns}" while the last two rows are called ``\textit{free columns}." We will have two special solutions since there are two free variables $x_3$ and $x_4$. For \V{s}$_1$, we choose $x_3=1$ and $x_4=0$.}
+			U \V{s}_1 = \textbf{0} \\ 
+			\begin{bmatrix}
+			1 & 2 & 2 & 4 \\
+			0 & 2 & 0 & 4
+			\end{bmatrix} \begin{bmatrix}
+			x_1 \\
+			x_2 \\
+			1 \\
+			0
+			\end{bmatrix} = \textbf{0} \\
+			\intertext{From row 2,}
+			0 + 2x_2 + 0 + 0 = 0\\
+			\intertext{From row 1,}
+			x_1 + 0 + 2 + 0 = 0 \\
+			x_1 = -2 \\
+			\intertext{Hence,}
+			\boxed{\V{s}_1 = \begin{bmatrix}
+				-2 \\
+				0 \\
+				1 \\
+				0
+				\end{bmatrix}}
+			\intertext{We do the same for \V{s}$_2$, but $x_3=0$ and $x_4=1$}
+			U \V{s}_2 = \textbf{0} \\ 
+			\begin{bmatrix}
+			1 & 2 & 2 & 4 \\
+			0 & 2 & 0 & 4
+			\end{bmatrix} \begin{bmatrix}
+			x_1 \\
+			x_2 \\
+			0\\
+			1
+			\end{bmatrix} = \textbf{0} \\
+			\intertext{From row 2,}
+			0 + 2x_2 + 0 + 4 = 0\\
+			x_2 = -2
+			\intertext{From row 1,}
+			x_1 + -4 + 0 + 4 = 0 \\
+			x_1 = 0 \\
+			\intertext{Hence,}
+			\boxed{					
+				\V{s}_2 = \begin{bmatrix}	
+				0 \\
+				-2 \\
+				0\\
+				1
+				\end{bmatrix}}
+			\end{gather*}
+	\end{example}
+	
 
 \subsection{Reduced Row Echelon Form $R$}
 		We already know how to do Gaussian elimination. To get to RREF, we must produce zeros above the pivots of $U$ and produce ones in the pivots of $U$ by using pivot rows to eliminate upward in $R$ and dividing the whole pivot row by its own pivot. The unique thing is that the nullspace does not change throughout the elimination process: $\textbf{N(A) = N(U) = N(R)}.$
@@ -333,42 +457,40 @@
 		
 		Many matrices only have one solution to $A\V{x} = 0$, the zero vector \V{Z}. The nullspaces of these matrices become $N(A)=\V{Z}$ without any special solutions. This case stresses the notion that $A$'s columns are \textbf{independent}. No combination of columns gives the zero vector except for the zero combination. All columns are pivots and there are no free columns. Below is another example.
 		
-		\begin{problem}{3}
+		\begin{example}
 			What are the special solutions of the following $4\times 5$ matrix?
 				$A = \left[\begin{array}{ccccc}
 				\vertbar & \vertbar &  \vertbar & \vertbar & \vertbar \\
 				p        &     p    &      f    &    p     &    f    \\
 				\vertbar & \vertbar &  \vertbar & \vertbar & \vertbar 
 				\end{array}\right]$
-		\end{problem}
-	
-		\begin{sol}
+				
 			\begin{gather*}
-				\intertext{Using elimination and doing RREF(A), we eventually reach $R$}
-						\V{R} = \begin{bmatrix}
-								\textbf{1} & 0 & a & 0 & c \\
-								0 & \textbf{1} & b & 0 & d \\
-								0 & 0 & 0 & \textbf{1}& e \\
-								0 & 0 & 0 & 0 &0
-								\end{bmatrix}
-				\intertext{There are only 2 free columns, therefore there are only 2 free variables. We will need $\V{s}_1 \text{and} \,\V{s}_2$. For \V{s}$_1$, we choose $x_3=1$ and $x_5=0$. For \V{s}$_2$, we choose $x_3=0$ and $x_5=1$.}
+			\intertext{Using elimination and doing RREF(A), we eventually reach $R$}
+					\V{R} = \begin{bmatrix}
+					\textbf{1} & 0 & a & 0 & c \\
+					0 & \textbf{1} & b & 0 & d \\
+					0 & 0 & 0 & \textbf{1}& e \\
+					0 & 0 & 0 & 0 &0
+					\end{bmatrix}
+			\intertext{There are only 2 free columns, therefore there are only 2 free variables. We will need $\V{s}_1 \text{and} \,\V{s}_2$. For \V{s}$_1$, we choose $x_3=1$ and $x_5=0$. For \V{s}$_2$, we choose $x_3=0$ and $x_5=1$.}
 					\V{s}_1 = \begin{bmatrix}	
-									-a \\
-									-b \\
-									1 \\
-									0 \\
-									0
-									\end{bmatrix},
-									\qquad
-									\V{s}_2= \begin{bmatrix}	
-												-c \\
-												-d \\
-												0 \\
-												-e \\
-												1
-												\end{bmatrix}
+								-a \\
+								-b \\
+								1 \\
+								0 \\
+								0
+								\end{bmatrix}, \qquad
+					\V{s}_2= \begin{bmatrix}	
+					-c \\
+					-d \\
+					0 \\
+					-e \\
+					1
+					\end{bmatrix}
 			\end{gather*}
-		\end{sol}
+		\end{example}
+	
 	
 	\begin{remark}
 		The example above is a short wide matrix where $n>m$ (there are more columns than rows). These systems lead to at least 1 free variable. \textbf{There are exactly $n-m$ free variables if $n>m$}.	
@@ -588,28 +710,31 @@
 	
 	
 \subsection{Linear Independence}
+\DefinitionSpace
 		\begin{definition}
 			The columns of $A$ are linearly independent when the only solution to $\nullsystem$ is $\V{x} = \textbf{0}$. No other combination $A\V{x}$ gives the zero vector.
 		\end{definition}
-	
+\DefinitionSpace
+
 		The columns are independent when the nullspace $N(A)$ contains only the zero vector.
-	
+\DefinitionSpace
 		\begin{definition}
 			The sequence of vectors $\V{v}_1, \V{v}_2, \ldots \V{v}_n$ is linearly dependent if the only combination that gives the zero vector is $0\V{v}_1 + 0\V{v}_2 + \ldots 0\V{v}_n$. If the combination $A\V{x}$ gives \textbf{0} when the $x$'s are not all zero, the vectors are dependent.
-			
+\DefinitionSpace		
 			\begin{gather*}
 				x_1 \V{v}_1+ x_2 \V{v}_2 + \ldots + x_n \V{v}_n = \textbf{0} \quad \text{only happens when all $x$'s are zero.}
 			\end{gather*}
 		\end{definition}
 	
-	A way to describe linear dependence is: ``\textit{One vector is a combination of other vectors}." 	
+	\noindent A way to describe linear dependence is: ``\textit{One vector is a combination of other vectors}." 	
 	
 \subsection{Vectors that Span a Subspace}
 		The column space is spanned by the columns of a matrix. The columns of a matrix span its column space and they might be dependent or independent.
+			\DefinitionSpace
 					\begin{definition}
 						A set of vectors \textbf{\textit{spans}} a space if their linear combinations fill the space.
 					\end{definition}
-		
+			\DefinitionSpace
 				
 					\begin{example}
 						\begin{gather*}
@@ -632,13 +757,15 @@
 	
 		
 	\noindent The combinations of the rows produce the ``\textbf{\textit{row space}}."
+	
+	\DefinitionSpace
 		\begin{definition}
 			The row space of a matrix is the subspace \R{n} spanned by the rows.
 				\begin{gather*}
 					\text{\textbf{The row space of $A$ is $C(A^T)$. It is the column space of $A^T$}}
 				\end{gather*}
 		\end{definition}
-	
+	\DefinitionSpace
 				\begin{example}
 					Describe the column space and row space of $A$.
 					\begin{gather*}
@@ -647,14 +774,13 @@
 					
 					The $C(A)$ is the plane in \R{3} spanned by the two columns of $A$. The $C(A^T)$ is spanned by the three rows of $A$. This row space is all of \R{2}. Remember: \textit{The rows are in \R{n} spanning the row space, while the columns are in \R{m} spanning the column space.}
 				\end{example}
-	
+	\DefinitionSpace
 	
 	
 	
 \subsection{A Basis for a Vector Space}
 		Two vectors can't span all of \R{3}, even if they are independent (because they only span a plane). Four vectors can't be independent, even if they span \R{3}. We want enough independent vectors to span the space (no more no less). A ``\textbf{basis}" is just right. The basis vectors are linearly independent vectors.
-		
-			 
+	
 			 \begin{example}
 			 	What are the basis vectors for $I = \begin{bmatrix} 1 & 0 \\ 0 & 1\end{bmatrix}$.
 			 	\begin{gather*}
@@ -664,10 +790,11 @@
 			 	If this were a $3 \times 3$ full rank matrix, we would have 3 basis vectors $\V{i}, \V{j}, \text{and } \V{k}$
 			 \end{example}
 	
-	
+	\DefinitionSpace
 		\begin{definition}
 			\textbf{The pivot columns of $A$ are a basis for its column space. The pivot rows of $A$ are a basis for its row space and so are the pivot rows of its echelon form $R$.}
 		\end{definition}
+	\DefinitionSpace
 	
 		\begin{example}
 			What are the basis vectors for $C(A) \text{and } C(A^T)$?
@@ -689,12 +816,41 @@
 				\end{equation*}
 		\end{example}
 	
-	
+	\DefinitionSpace
 		\begin{definition}
 			The dimension of a space is the number of vectors in a basis.
 		\end{definition}
+	\DefinitionSpace
 	
 	
 	
+\section{Dimensions of the Four Subspaces}
+	\begin{enumerate}
+		\item The row space $C(A^T)$, a subspace of \R{n}
+		\item The column space $C(A)$, a subspace of \R{m}
+		\item The nullspace is $N(A)$, a subspace of \R{n}
+		\item The left nullspace is $N(A^T)$, a subspace of \R{m}
+	\end{enumerate}
+	
+	\noindent The left nullspace is the nullspace of $A^T$. We solve for $A^T \V{y} = \textbf{0}$ in the left nullspace. The vectors $y$ go to the left side of $A$ when we transpose the system into $\V{y}^T A = \textbf{0}$. \\
+	
+	
+	\noindent Here are the dimensions of the four subspaces for $A$: 	
+		\begin{center}
+				\begin{tabular}{ |l|c|c| } 
+					\hline
+						Subspace & Dimension & Basis for A\\
+					\hline
+						Row space $C(A^T)$  	& $r$   & $r$ pivot rows of $R$\\ 
+						Column space $C(A)$ 	& $r$   & $r$ pivot columns of $A$ (not $R$)\\ 
+						Nullspace $N(A)$  		& $n-r$ & $n-r$ special solutions \\
+						Left Nullspace $N(A^T)$ & $m-r$ & in $EA = R$, the last $m-r$ rows of $E$ are the basis\\
+					\hline
+			\end{tabular}
+		\end{center}
+	
+	
+	
+\section{Problem Set}
 	
 \end{document}
