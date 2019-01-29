@@ -28,18 +28,6 @@
 
 \newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
 
-\newenvironment{problem}[2][Problem]{\begin{trivlist}
-		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-\newenvironment{sol}
-{\emph{Solution:}
-}
-{
-	\qed
-}
-\specialcomment{com}{ \color{blue} \textbf{Comment:} }{\color{black}} %for instructor comments while grading
-\NewEnviron{probscore}{\marginpar{ \color{blue} \tiny Problem Score: \BODY \color{black} }}
-
-
 \begin{document}
 	\maketitle
 	\begin{abstract}
@@ -70,7 +58,7 @@
 				\noindent Here are three vector spaces other than \R{n}:
 			\begin{description}[labelindent=2\parindent]
 				\item[$\mathbb{M}$] The vector space of all real $2\times2$ matrices
-				\item[$\mathbb{M}$] The vector space of all real functions $f(x)$
+				\item[$\mathbb{F}$] The vector space of all real functions $f(x)$
 				\item[$\mathbb{Z}$] The vector space that consists only of a zero vector
 			\end{description}
 			
