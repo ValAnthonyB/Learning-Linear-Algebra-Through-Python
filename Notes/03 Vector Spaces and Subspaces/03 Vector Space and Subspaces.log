@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.4.5)  29 JAN 2019 13:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.4.5)  29 JAN 2019 14:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -209,22 +209,23 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 ))
 \c@definition=\count104
 \c@example=\count105
+\c@theorem=\count106
 
 (./03 Vector Space and Subspaces.aux)
 \openout1 = `"03 Vector Space and Subspaces.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -262,16 +263,16 @@ LaTeX Font Info:    ... okay on input line 31.
 
 (c:/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count106
+\scratchcounter=\count107
 \scratchdimen=\dimen125
 \scratchbox=\box29
-\nofMPsegments=\count107
-\nofMParguments=\count108
+\nofMPsegments=\count108
+\nofMParguments=\count109
 \everyMPshowfont=\toks29
-\MPscratchCnt=\count109
+\MPscratchCnt=\count110
 \MPscratchDim=\dimen126
-\MPnumerator=\count110
-\makeMPintoPDFobject=\count111
+\MPnumerator=\count111
+\makeMPintoPDFobject=\count112
 \everyMPtoPDFconversion=\toks30
 ) (c:/texlive/2017/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
@@ -319,60 +320,60 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for U+msa on input line 32.
+LaTeX Font Info:    Try loading font information for U+msa on input line 33.
 
 (c:/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 32.
+LaTeX Font Info:    Try loading font information for U+msb on input line 33.
 
 (c:/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {c:/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 154--155
+Underfull \hbox (badness 10000) in paragraph at lines 155--156
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 154--155
+Underfull \hbox (badness 10000) in paragraph at lines 155--156
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 156--157
+Underfull \hbox (badness 10000) in paragraph at lines 157--158
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 156--157
+Underfull \hbox (badness 10000) in paragraph at lines 157--158
 
  []
 
 [4] [5] [6] [7]
-Overfull \hbox (22.60904pt too wide) in paragraph at lines 449--455
+Overfull \hbox (22.60904pt too wide) in paragraph at lines 450--456
 []\OT1/cmr/bx/n/12 Example 7. []\OT1/cmr/m/n/12 What are the spe-cial so-lu-tio
 ns of the fol-low-ing $4 \OMS/cmsy/m/n/12 ^^B \OT1/cmr/m/n/12 5$ ma-trix? $\OML
 /cmm/m/it/12 A \OT1/cmr/m/n/12 = []$ 
  []
 
 [8] [9] [10] [11] [12]
-Overfull \hbox (32.18315pt too wide) detected at line 686
+Overfull \hbox (32.18315pt too wide) detected at line 687
 []
  []
 
 [13] [14] [15]
-Underfull \hbox (badness 10000) in paragraph at lines 823--824
+Underfull \hbox (badness 10000) in paragraph at lines 829--830
 
  []
 
 [16] (./03 Vector Space and Subspaces.aux) ) 
 Here is how much of TeX's memory you used:
- 3594 strings out of 494893
- 49076 string characters out of 6179935
- 130268 words of memory out of 5000000
- 6825 multiletter control sequences out of 15000+600000
+ 3600 strings out of 494893
+ 49131 string characters out of 6179935
+ 130309 words of memory out of 5000000
+ 6831 multiletter control sequences out of 15000+600000
  21965 words of font info for 80 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  39i,19n,43p,830b,272s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -391,7 +392,7 @@ cmsy10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 ><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texl
 ive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2017/
 texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on "03 Vector Space and Subspaces.pdf" (16 pages, 208403 bytes).
+Output written on "03 Vector Space and Subspaces.pdf" (16 pages, 208844 bytes).
 
 PDF statistics:
  120 PDF objects out of 1000 (max. 8388607)

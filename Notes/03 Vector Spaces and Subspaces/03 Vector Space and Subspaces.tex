@@ -24,6 +24,7 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{example}{Example}
+\newtheorem{theorem}{Theorem}
 
 
 \newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
@@ -819,6 +820,11 @@
 		\item The nullspace is $N(A)$, a subspace of \R{n}
 		\item The left nullspace is $N(A^T)$, a subspace of \R{m}
 	\end{enumerate}
+
+	\begin{theorem}
+		Fundamental Theorem of Linear Algebra, Part 1: 
+		\textbf{The column space and row space both have dimension $r$. The nullspace and left nullspace have dimensions $n-r$ and $m-r$, respectively}.
+	\end{theorem}\DefinitionSpace
 	
 	\noindent The left nullspace is the nullspace of $A^T$. We solve for $A^T \V{y} = \textbf{0}$ in the left nullspace. The vectors $y$ go to the left side of $A$ when we transpose the system into $\V{y}^T A = \textbf{0}$. \\
 	
