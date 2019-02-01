@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.4.5)  31 JAN 2019 13:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.4.5)  2 FEB 2019 01:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -214,18 +214,18 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 (./04 Orthogonality.aux)
 \openout1 = `"04 Orthogonality.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -320,12 +320,12 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for U+msa on input line 38.
+LaTeX Font Info:    Try loading font information for U+msa on input line 40.
 
 (c:/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 38.
+LaTeX Font Info:    Try loading font information for U+msb on input line 40.
 
 (c:/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -335,38 +335,59 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <4-subspaces.png, id=17, 855.94781pt x 432.86719pt>
 File: 4-subspaces.png Graphic file (type png)
  <use 4-subspaces.png>
-Package pdftex.def Info: 4-subspaces.png used on input line 141.
+Package pdftex.def Info: 4-subspaces.png used on input line 143.
 (pdftex.def)             Requested size: 427.97285pt x 216.43306pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[2] [3 <./4-subspaces.png>] [4] (./04 Orthogonality.aux) ) 
+[2] [3 <./4-subspaces.png>] <projection.png, id=26, 688.82344pt x 309.40594pt>
+File: projection.png Graphic file (type png)
+
+<use projection.png>
+Package pdftex.def Info: projection.png used on input line 181.
+(pdftex.def)             Requested size: 344.41087pt x 154.70259pt.
+ <projection_2D.png, id=27, 334.24875pt x 277.035pt>
+File: projection_2D.png Graphic file (type png)
+
+<use projection_2D.png>
+Package pdftex.def Info: projection_2D.png used on input line 206.
+(pdftex.def)             Requested size: 167.12396pt x 138.51715pt.
+ [4 <./projection.png>] [5 <./projection_2D.png>]
+[6] <projection_n.png, id=38, 320.69812pt x 293.59688pt>
+File: projection_n.png Graphic file (type png)
+
+<use projection_n.png>
+Package pdftex.def Info: projection_n.png used on input line 280.
+(pdftex.def)             Requested size: 160.34866pt x 146.79807pt.
+ [7 <./projection_n.png>] [8] [9] (./04 Orthogonality.aux) ) 
 Here is how much of TeX's memory you used:
- 3578 strings out of 494893
- 48630 string characters out of 6179935
- 121364 words of memory out of 5000000
- 6812 multiletter control sequences out of 15000+600000
- 15757 words of font info for 58 fonts, out of 8000000 for 9000
+ 3605 strings out of 494893
+ 49091 string characters out of 6179935
+ 129491 words of memory out of 5000000
+ 6834 multiletter control sequences out of 15000+600000
+ 16402 words of font info for 61 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 39i,16n,43p,355b,259s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/texlive/2017/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2017/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2017/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmex10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmmi12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8
-.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/t
-exlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/201
-7/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2017/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2017/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmti12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfont
-s/symbols/msbm10.pfb>
-Output written on "04 Orthogonality.pdf" (4 pages, 295013 bytes).
+ 39i,16n,43p,563b,274s stack positions out of 5000i,500n,10000p,200000b,80000s
+<c:/texlive/2017/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2017/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2017/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmex10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmmi12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i6.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:
+/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2
+017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2017/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2017/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2017/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmsy10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmsy8.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
+12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.p
+fb>
+Output written on "04 Orthogonality.pdf" (9 pages, 426333 bytes).
 PDF statistics:
- 70 PDF objects out of 1000 (max. 8388607)
- 49 compressed objects within 1 object stream
+ 98 PDF objects out of 1000 (max. 8388607)
+ 67 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
