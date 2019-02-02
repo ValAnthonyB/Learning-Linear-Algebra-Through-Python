@@ -1,6 +1,6 @@
 \documentclass[12pt, letterpaper]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amsthm,array, amssymb,amsfonts, enumitem, fancyhdr, color, comment, graphicx, environ}
+\usepackage{amsmath,amsthm,array, amssymb,amsfonts, cancel, enumitem, fancyhdr, color, comment, graphicx, environ}
 
 \setlist[description]{leftmargin=\parindent,labelindent=\parindent}
 
@@ -39,7 +39,7 @@
 \begin{document}
 	\maketitle
 	\begin{abstract}
-		This chapter focuses on the orthogonality of the four subspaces, projections, and least squares approximations.
+		This chapter focuses on the orthogonality of the four subspaces, orthogonal vectors, projections, least squares approximations, and the Gram-Schmidt factorization.
 	\end{abstract}
 
 \section{Orthogonality of the Four Subspaces}
@@ -374,6 +374,15 @@
 	
 	We cannot always get $\V{e} = \V{b} - A\V{x}$ to zero (with zero error, we can solve the system exactly with \V{x}). When the length of $\V{e}$ is as small as possible, $\hat{\V{x}}$ is a least squares solution. 
 	
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.4]{big_picture_ls.png}
+		\caption{The big picture of least squares. The projection $\V{p} = A \hat{\V{x}}$ is closest to \V{b}, so $\hat{\V{x}}$ minimizes $E = ||\V{b} - A\V{x}||^2$}
+		\label{LSbigpicture}
+	\end{figure}
+	
+	
 	\begin{remark}
 		When $A\V{x} = \V{b}$ has no solution, multiply by $A^T$ and solve $A^T A \hat{\V{x}} = A^T \V{b}$.
 	\end{remark}
@@ -429,24 +438,223 @@
 					\hat{\V{x}} = \begin{bmatrix} 5 \\ -3\end{bmatrix} 
 			\end{gather*}
 	\end{example}
-
+	\DefinitionSpace
 	\begin{remark}
 		The least squares solution $\hat{\V{x}}$ makes $E = ||A\V{x} - \V{b}||^2$ as small as possible.
 	\end{remark}
-
+	\DefinitionSpace
 	\begin{remark}
 		The partial derivatives of $||A\V{x} - \V{b}||^2$ are zero when $A^T A \hat{\V{x}} = A^T \V{b}$.
 	\end{remark}
-	
-	
+	\DefinitionSpace
 
-
+	\begin{example}
+		$A$ has orthogonal columns when the measurement times $t_i$ add to zero. Suppose $\V{b} = (1,2,4)$ and $t=(-2,0,2)$. We want to fit these points into a line.
+		
+		\begin{gather*}
+			C + D\cdot(-2) = 1 \\
+			C + D\cdot(0) = 2 \\
+			C + D\cdot(2) = 4 
+		\intertext{Notice that the two columns of $A$ are orthogonal via the dot product test ($\V{\text{col}}_1 \cdot \V{\text{col}}_2 = 0$). $A$ and \V{b} becomes:}
+			A\V{x} = \begin{bmatrix}
+							1&-2 \\ 1 & 0 \\ 1&2
+						\end{bmatrix} \begin{bmatrix}
+										C \\ D
+										\end{bmatrix} = \begin{bmatrix}
+															1 \\ 2 \\ 4
+															\end{bmatrix}
+		\intertext{When the columns of $A$ are orthogonal, $A^T A$ will be a diagonal matrix.}
+			A^T A \hat{\V{x}} = A^T \V{b} \rightarrow \begin{bmatrix}
+															3 & 0 \\ 0 & 8
+														\end{bmatrix}\begin{bmatrix}
+																		C \\ D
+																		\end{bmatrix} = \begin{bmatrix}
+																						7 \\ 6
+																						\end{bmatrix}
+		\intertext{We see that $A^T A$ is a diagonal matrix. This makes solving for $\hat{\V{x}}$ a lot easier.}
+		\end{gather*}
+	\end{example}
+	
 
 \section{Orthonormal Bases and Gram-Schmidt}
+	Orthogonality is good. Dot products are zero, so $A^T A$ will be diagonal. It becomes easier to find $\hat{\V{x}}$ and $\V{p} = A\hat{x}$. The goal of this subsection is to construct orthogonal vectors. The Gram-Schmidt process chooses original basis vectors to produce right angles. Those original vectors are the columns of a non-orthogonal matrix $A$. The orthonormal basis vectors will be the columns of a new matrix $Q$.
 
+	The vectors $\V{q}_1,\ldots,\V{q}_n$ are orthogonal if their dot products $\V{q}_i \cdot \V{q}_j$ are zero whenever $i \ne j$. When we divide each vector by its length, the vectors become orthogonal unit vectors. Their lengths are all 1. Then the basis is called \textbf{\textit{orthonormal}}.
+	 
+	\begin{definition}
+		The vectors $\V{q}_1,\ldots,\V{q}_n$ are orthonormal if
+		\begin{gather*}
+			\V{q}_i^T \V{q} = \begin{cases} 
+									0 & \text{when $i\ne j$ (orthogonal vectors)} \\
+									1 & \text{when $i = j$ (unit vectors: $||\V{q}_i|| = 1$)}
+									\end{cases}
+		\end{gather*}
+		A matrix with orthonormal columns is assigned the special letter $Q$.
+	\end{definition}
 
+	\begin{remark}
+		A matrix $Q$ with orthonormal columns satisfies $Q^T Q = I$. 
+		
+			\begin{gather*}
+				Q^T Q = \begin{bmatrix}
+							\rule{0.5cm}{0.001em} & \V{q}_1^T & \rule{0.5cm}{0.001em} \\
+							&\vdots& \\ 
+							\rule{0.5cm}{0.001em} & \V{q}_n^T & \rule{0.5cm}{0.001em} 
+						\end{bmatrix} \begin{bmatrix}
+										\vertbar & \ldots & \vertbar \\ 
+										\V{q}_1 & \ldots & \V{q}_n\\ 
+										\vertbar & \ldots & \vertbar \\ 
+									  \end{bmatrix} = \begin{bmatrix}
+														  1 & 0 & \ldots & 0     \\ 
+														  0 & 1 & \ldots & 0     \\ 
+														  \vdots & \vdots & \ddots & \vdots\\ 
+														  0 & 0 & \ldots & 1
+													  \end{bmatrix}
+			\end{gather*}
+	\end{remark}
+	\begin{theorem}
+		When $Q$ is a square matrix, $Q^T Q = I$ means that $Q^T = Q^{-1}$.
+	\end{theorem}
+	\begin{proof}
+		\begin{gather*}
+			Q^T Q = I
+		\intertext{Multiplying from the right by $Q^{-1}$}
+			Q^T Q Q^{-1} = I Q^{-1}
+		\intertext{By definition, $QQ^{-1}$ = I. Therefore,}
+			Q^T = Q^{-1}
+		\end{gather*}
+	\end{proof}
 
+	
+	\begin{example}
+		A rotation matrix is an orthogonal matrix. $Q$ rotates each vector in the plane by the angle $\theta$.
+			$$Q = \begin{bmatrix}
+						\cos{\theta} & -\sin{\theta}\\
+						\sin{\theta} & \cos{\theta}
+			\end{bmatrix}$$
+			These columns give an orthonormal basis for \R{2}.
+	\end{example}
+\DefinitionSpace
 
+	\begin{example}
+		A permutation matrix is also an orthogonal matrix.
+		\[\begin{bmatrix}
+					0 & 1 & 0 \\
+					0 & 0 & 1 \\
+					1 & 0 & 0
+				\end{bmatrix}\begin{bmatrix}
+								x\\y\\z
+								\end{bmatrix} = \begin{bmatrix}
+													y\\z\\x
+													\end{bmatrix} \]
+	\end{example}
+	\DefinitionSpace
+	\begin{theorem}
+		Rotations, reflections, and permutations preserve the length of every vector. So does multiplication by any orthogonal matrix $Q$ - \textbf{lengths and angles do not change!}.
+	\end{theorem}
+	\begin{proof}
+		\begin{gather*}
+			(Q\V{x})^T (Q\V{x}) = \V{x}^T Q^T Q \V{x} = \V{x}^T I \V{x} = \V{x}^T \V{x} \\
+			||Q\V{x}||^2 = ||\V{x}||^2
+		\end{gather*}
+	\end{proof}
+	\DefinitionSpace
+	\begin{theorem}
+		If $Q$ has orthonormal columns ($Q^T Q = I$), it leaves lengths unchanged.
+		\[
+		||Q\V{x}|| = ||\V{x}|| \text{ for every vector \V{x}}
+		\]
+		$Q$ also preserves dot products: $(Q\V{x})^T (Q\V{y}) = \V{x}^T Q^T Q\V{y} = \V{x}^T \V{y}$
+	\end{theorem}
+\subsection{Projections Using Orthonormal Bases: $Q$ Replaces $A$}
+	Orthonormal matrices simplify many projection problems. There are no matrices to invert because we can simply use the transpose.
+	
+	\begin{center}
+		{\renewcommand{\arraystretch}{1.2}
+			\begin{tabular}{|c|c|}
+				\hline
+				\textit{Non-orthonormal} & \textit{Orthonormal} \\
+				\hline
+				$A^T A \hat{\V{x}} = A^T \V{b}$ & $\cancel{Q^T Q} \hat{\V{x}} = Q^T \V{b} \rightarrow \hat{\V{x}} = Q^T \V{b}$\\ 
+				$\V{p} = A^T \hat{\V{x}}$ & $\V{p} = Q^T \hat{\V{x}} = QQ^T \V{b}$ \\
+				$P = A (A^T A)^{-1}A^T$ & $P = Q (\cancel{Q^T Q})^{-1}Q^T = QQ^T$\\
+				\hline
+		\end{tabular}}
+	\end{center}
+
+	\begin{gather*}
+		\intertext{Projection onto $\V{q}$'s:}
+			\V{p} = \begin{bmatrix}
+					\vertbar &  & \vertbar \\ 
+					\V{q}_1 & \ldots & \V{q}_n\\ 
+					\vertbar &  & \vertbar \\ 
+					\end{bmatrix} \begin{bmatrix}
+										\V{q}_1 \V{b}\\ 
+										\vdots \\ 
+										\V{q}_n \V{b} 
+										\end{bmatrix} = \V{q}_1(\V{q}_1^T \V{b}) + \ldots + \V{q}_n(\V{q}_n^T \V{b})
+	\end{gather*}
+	
+	\textbf{Important Case}: When $Q$ is square, the subspace is the whole space. Then $Q^T = Q^{-1}$ and $\hat{\V{x}} = Q^T \V{b}$ is the same as $\hat{\V{x}} = Q^T \V{b}$. The solution is exact. The projection of \V{b} onto the whole space is \V{b} itself. In this case, $\V{p} = \V{b}$ and $P = Q Q^T = I$.
+	
+	When $\V{p} = \V{b}$, our formula assembles \V{b} out of its 1-dimensional projections. If $\V{q}_1, \ldots, \V{q}_n$ is an orthonormal basis for the whole space, then $Q$ is square. Every $\V{b} = Q Q^T \V{b}$ is the sum of its components along the $\V{q}$'s.
+		\begin{equation}
+			\V{b} = \V{q}_1 (\V{q}_1^T \V{b}) + \ldots + \V{q}_n (\V{q}_n^T \V{b})
+		\end{equation}
+	\begin{remark}
+		$QQ^T = I$ is the foundation of Fourier series and all great ``transforms" of applied mathematics. They break vectors \V{b} or functions $f(x)$ into perpendicular pieces. Then by adding the pieces in Equation 6, the inverse transform puts \V{b} and $f(x)$ back together.
+	\end{remark}
+
+\subsection{Gram-Schmidt Process}
+	\begin{example}
+		Start with three independent vectors $\V{a}, \V{b}, \V{c}$. Our goal is to make three orthogonal vectors $\V{A}, \V{B}, \V{C}$. At the end, we divide each orthogonal vector by their lengths. The result is $\V{q}_1 = \V{A}/||A||, \V{q}_2 = \V{B}/||B||, \V{q}_3 = \V{C}/||C||$.
+		\begin{gather*}
+			\intertext{Begin by choosing the first orthogonal vector as:}
+				\V{A} = \V{a}
+			\intertext{The next direction \V{B} must be perpendicular to \V{A}. Start with \V{b} and subtract its projection along \V{A}:}
+				\V{B} = \V{b} - \frac{\V{A}^T \V{b}}{\V{A}^T \V{A}} \V{A}
+			\intertext{\V{B} is the same as the error vector $\V{e}$ perpendicular to \V{A}. For the next Gram-Schmidt step, we subtract off $C$'s components in the two directions of $A$ and \V{B} to get a perpendicular direction \V{C}.}	
+				\V{C} = \V{c} - \frac{\V{A}^T \V{c}}{\V{A}^T \V{A}} \V{A} - \frac{\V{B}^T \V{c}}{\V{B}^T \V{B}} \V{B}
+			\intertext{The goal of the Gram-Schmidt process is to subtract from every new vector its projections in the directions already set. Finally, the next step is to normalize the orthogonal vectors $\V{A}, \V{B}, \V{C}$.}
+		\end{gather*}
+	\end{example}
+
+\subsection{Factorization of $A = QR$}
+	The goal of $QR$ factorization is to relate $A$ and $Q$ using $A = QR$, where $R$ is a triangular matrix. QR decomposition is Gram-Schmidt in a nutshell.  
+	\begin{gather*}
+		A = QR \\
+		\begin{bmatrix}
+			\vertbar & \vertbar & \vertbar \\ 
+			\V{a} & \V{b} & \V{c}\\ 
+			\vertbar & \vertbar & \vertbar \\ 
+		\end{bmatrix} = \begin{bmatrix}
+							\vertbar & \vertbar & \vertbar \\ 
+							\V{q}_1 & \V{q}_2 & \V{q}_3\\ 
+							\vertbar & \vertbar & \vertbar \\ 
+						\end{bmatrix}\begin{bmatrix}
+										\V{q}_1^T\V{a} & \V{q}_1^T\V{b} & \V{q}_1^T\V{c} \\ 
+										        	   & \V{q}_2^T\V{b} & \V{q}_2^T\V{c}\\ 
+										               &                & \V{q}_3^T\V{c} \\ 
+									\end{bmatrix}
+	\end{gather*}
+		To get $R$, we simply multiply both sides by $Q^T$ then we get $R = Q^T A$.
+		
+		\begin{definition}
+			From independent vectors $\V{a}_1, \ldots, \V{a}_n$, Gram-Schmidt constructs orthonormal vectors $\V{q}_1, \ldots, \V{q}_n$. The matrices with these columns satisfy $A = QR$. Then $R = Q^T A$ is upper triangular because later $\V{q}$'s are orthogonal to earlier $\V{a}$'s
+		\end{definition}
+	
+		Any $m \times n$ matrix $A$ with independent column vectors can be factored into $A = QR$. The $m \times n$ matrix $Q$ has orthonormal columns, and the square matrix $R$ is upper triangular with a positive diagonal. $QR$ factorization is important to least squares because:
+			\begin{equation}
+				A^T A = (QR)^T (QR) = R^T Q^T Q R = R^T R
+			\end{equation}
+		Then the least squares equation $A^T A \hat{\V{x}} = A^T \V{b}$ simplifies to $R^T R \hat{\V{x}} = R^T Q^T \V{b}$. Then we reach:
+				\begin{equation}
+					R\hat{\V{x}} = Q^T \V{b}
+				\end{equation}
+				
+		\begin{remark}
+			Least squares becomes $R^T R \hat{\V{x}} = R^T Q^T \V{b}$ or $R\hat{\V{x}} = Q^T \V{b}$ or $\boxed{\hat{\V{x}} = R^{-1} Q^T \V{b}}$. 
+		\end{remark}
 \section{Problems}
 
 

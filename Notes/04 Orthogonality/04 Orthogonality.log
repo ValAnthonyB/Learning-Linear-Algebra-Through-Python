@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.4.5)  2 FEB 2019 13:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.4.5)  2 FEB 2019 23:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -141,6 +141,9 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
+(c:/texlive/2017/texmf-dist/tex/latex/cancel/cancel.sty
+Package: cancel 2013/04/12 v2.2 Cancel math terms
+)
 (c:/texlive/2017/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \labelindent=\skip51
@@ -361,47 +364,63 @@ File: projection_n.png Graphic file (type png)
 Package pdftex.def Info: projection_n.png used on input line 280.
 (pdftex.def)             Requested size: 160.34866pt x 146.79807pt.
  [7 <./projection_n.png>] [8] [9]
-<least_squares_problem1.png, id=50, 770.88pt x 578.16pt>
+<big_picture_ls.png, id=50, 852.93657pt x 431.36156pt>
+File: big_picture_ls.png Graphic file (type png)
+
+<use big_picture_ls.png>
+Package pdftex.def Info: big_picture_ls.png used on input line 380.
+(pdftex.def)             Requested size: 341.16858pt x 172.54156pt.
+
+<least_squares_problem1.png, id=51, 770.88pt x 578.16pt>
 File: least_squares_problem1.png Graphic file (type png)
 
 <use least_squares_problem1.png>
-Package pdftex.def Info: least_squares_problem1.png used on input line 385.
+Package pdftex.def Info: least_squares_problem1.png used on input line 394.
 (pdftex.def)             Requested size: 269.81204pt x 202.35902pt.
- [10 <./least_squares_problem1.png>]
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[10 <./big_picture_ls.png>]
 <least_squares_answer.png, id=56, 770.88pt x 578.16pt>
 File: least_squares_answer.png Graphic file (type png)
 
 <use least_squares_answer.png>
-Package pdftex.def Info: least_squares_answer.png used on input line 414.
+Package pdftex.def Info: least_squares_answer.png used on input line 423.
 (pdftex.def)             Requested size: 269.81204pt x 202.35902pt.
- [11 <./least_squares_answer.png>] [12]
-(./04 Orthogonality.aux) ) 
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[11 <./least_squares_problem1.png>] [12 <./least_squares_answer.png>] [13]
+[14] [15] [16] (./04 Orthogonality.aux) ) 
 Here is how much of TeX's memory you used:
- 3617 strings out of 494893
- 49432 string characters out of 6179935
- 129509 words of memory out of 5000000
- 6844 multiletter control sequences out of 15000+600000
- 16402 words of font info for 61 fonts, out of 8000000 for 9000
+ 3655 strings out of 494893
+ 50004 string characters out of 6179935
+ 131353 words of memory out of 5000000
+ 6876 multiletter control sequences out of 15000+600000
+ 17070 words of font info for 63 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 39i,16n,43p,563b,300s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/texlive/2017/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmbx10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmb
-x12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb
-><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texl
-ive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2017/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2017/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2017/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr17.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
-><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texl
-ive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2017/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2017/texmf-dist
-/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on "04 Orthogonality.pdf" (12 pages, 457945 bytes).
+ 39i,20n,43p,563b,320s stack positions out of 5000i,500n,10000p,200000b,80000s
+<c:/texlive/2017/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmbx12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmbxti10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex
+10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c
+:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/
+2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2017/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2017/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr17.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr8.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
+10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:
+/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/
+2017/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb><c:/texlive/201
+7/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on "04 Orthogonality.pdf" (16 pages, 622527 bytes).
 PDF statistics:
- 112 PDF objects out of 1000 (max. 8388607)
- 74 compressed objects within 1 object stream
+ 130 PDF objects out of 1000 (max. 8388607)
+ 86 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 
