@@ -332,7 +332,7 @@
 			P = A(A^TA)^{-1} A^T = \begin{bmatrix} 1 & 0\\ 1 & 1 \\ 1&2 \end{bmatrix} * \frac{1}{6} \begin{bmatrix} 5 & -3 \\ -3 & 3\end{bmatrix}  * \begin{bmatrix} 1 & 1 & 1\\ 0 & 1 & 2 \end{bmatrix} = \frac{1}{6} \begin{bmatrix} 5 & 2 & -1\\ 2 & 2 & 2 \\ -1 & 2 & 5\end{bmatrix}
 		\intertext{Projecting it twice,}
 			P^2 = \frac{1}{6} \begin{bmatrix} 5 & 2 & -1\\ 2 & 2 & 2 \\ -1 & 2 & 5\end{bmatrix} * \frac{1}{6} \begin{bmatrix} 5 & 2 & -1\\ 2 & 2 & 2 \\ -1 & 2 & 5\end{bmatrix} = \frac{1}{6} \begin{bmatrix} 5 & 2 & -1\\ 2 & 2 & 2 \\ -1 & 2 & 5\end{bmatrix} \\
-			P^2 = P
+			\boxed{P^2 = P}
 		\end{gather*}
 	\end{example}\DefinitionSpace 
 
@@ -340,8 +340,21 @@
 	
 		\begin{theorem}
 			$A^T A$ is invertible if and only if $A$ has linearly independent columns.
-		\end{theorem}\DefinitionSpace 
-
+		\end{theorem} 
+		\begin{proof}
+			$A^T A$ and $A$ share the same nullspace in \R{n}. $A$ is invertible when its nullspace is the zero vector. The same goes for $A^T A$. Let $A$ be any matrix. If \V{x} is in the nullspace of $A$, then $A\V{x} = \textbf{0}$. Multiplying both sides by $A^T$ gives:
+				\begin{gather*}
+					A^T A \V{x} = \textbf{0} 
+				\intertext{We prove $A\V{x}=\textbf{0}$ from here. We multiply $\V{x}^T$ to both sides.}
+					(x^T)A^T A \V{x} = \textbf{0} \\
+					(A\V{x})^T (A\V{x}) = \textbf{0} \\
+					A\V{x} \cdot A\V{x} = \textbf{0} \\
+					||A \V{x}||	= \textbf{0}	 
+				\end{gather*}
+			If $A^T A \V{x} = \textbf{0}$, then $A\V{x}$ has length zero. Therefore $A\V{x}=\textbf{0}$. Every vector \V{x} in the nullspace of $A$ is also in the nullspace of $A^T A$. If $A$ has dependent columns, then $A^T A$ also has dependent columns. If $A$ has independent columns, then $A^T A$ also has independent columns. In this case, $A^T A$ is invertible.
+		\end{proof}
+		
+		\DefinitionSpace
 		\begin{theorem}
 			When $A$ has independent columns, $A^T A$ is square and invertible.
 		\end{theorem}
@@ -349,23 +362,83 @@
 			\begin{gather*}
 				\intertext{Take the transpose of $A^T A$:}
 					(A^T A)^T = A^T (A^T)^T = A^T A \\
-					(A^T A)^T = A^T A
+					\boxed{(A^T A)^T = A^T A}
 			\end{gather*}
 			Hence, $A^T A$ is symmetric. Since $A$ has independent columns, this means that $A^T$ is also invertible. Hence, $A^T A$ is invertible.
 		\end{proof}
 
 
 
-
-
-
-
-
-
-
 \section{Least Squares Approximations}
+	Sometimes $A\V{x} = \V{b}$ has no solution. This is seen in the case of overdetermined systems where there are more equations than unknowns which means that \V{b} is outside the column space of $A$. 
+	
+	We cannot always get $\V{e} = \V{b} - A\V{x}$ to zero (with zero error, we can solve the system exactly with \V{x}). When the length of $\V{e}$ is as small as possible, $\hat{\V{x}}$ is a least squares solution. 
+	
+	\begin{remark}
+		When $A\V{x} = \V{b}$ has no solution, multiply by $A^T$ and solve $A^T A \hat{\V{x}} = A^T \V{b}$.
+	\end{remark}
 
+	\begin{example}
+		An important application of least squares is fitting a straight line to $m$ points. This problem is called ``linear regression" in statistics. We have to find the closest line to the points $(0,6), (1,0), \text{and } (2,0)$. 
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[scale=0.35]{least_squares_problem1.png}
+				\caption{Points that need to be fitted with a straight line.}
+				\label{problem_least_squares}
+			\end{figure}
+			\begin{gather*}
+			\intertext{The general equation for a line is:}
+				C + Dx = y
+			\intertext{From those points, we can generate our matrix $A$.}
+				C + D\cdot(0) = 6 \\
+				C + D\cdot(1) = 0 \\
+				C + D\cdot(2) = 0 \\
+			\intertext{We are left with the following system of equations:}
+				A = \begin{bmatrix}
+						1 & 0 \\
+						1 & 1 \\
+						1 & 2
+						\end{bmatrix} \quad \hat{\V{x}} = \begin{bmatrix} C \\ D \end{bmatrix} \quad
+				\V{b} = \begin{bmatrix}6 \\ 0 \\ 0 \end{bmatrix}
+			\intertext{We want to solve $A^T A \hat{\V{x}} = A^T \V{b}$:}
+				A^T A = \begin{bmatrix} 1 & 1 & 1 \\ 0 & 1 & 2\end{bmatrix} \begin{bmatrix} 1 & 0 \\ 1 & 1 \\ 1 & 2 \end{bmatrix} = \begin{bmatrix} 3 & 3 \\ 3 & 5\end{bmatrix} \\ 
+				A^T \V{b} = \begin{bmatrix} 1 & 1 & 1 \\ 0 & 1 & 2\end{bmatrix} \begin{bmatrix} 6 \\ 0 \\ 0\end{bmatrix} = \begin{bmatrix} 6\\ 0\end{bmatrix}
+			\intertext{Solving for $\hat{\V{x}}$:}
+				\hat{\V{x}} = (A^T A)^{-1}A^T \V{b} = \begin{bmatrix}\frac56 & -\frac12\\ -\frac12 & \frac12\end{bmatrix} \begin{bmatrix} 1 & 1 & 1 \\ 0 & 1 & 2\end{bmatrix} \begin{bmatrix} 6 \\ 0 \\ 0\end{bmatrix} \\
+				\hat{\V{x}} = \begin{bmatrix} 5 \\ -3\end{bmatrix} 
+			\intertext{Hence, the equation of the fitted line is:}
+				\boxed{y = 5 - 3x}
+			\end{gather*}
+			\begin{figure}[h!]
+				\centering
+				\includegraphics[scale=0.35]{least_squares_answer.png}
+				\caption{The points and the linear fit.}
+				\label{problem_least_squares_answer}
+			\end{figure}
+			\begin{gather*}
+				\intertext{This problem can also be solved through calculus. We want to minimize $||A\V{x} - \V{b}||^2 = ||\V{e}||^2$}
+					||A\V{x} - \V{b}|| = ||\V{e}||^2 = \V{e}_1^2 + \V{e}_2^2 + V{e}_3^2	\\
+					\V{e}_1^2 + \V{e}_2^2 + \V{e}_3^2 = (C+D\cdot(0) - 6)^2 + (C+D\cdot(1))^2 + (C+D\cdot(2))^2
+				\intertext{Setting $||A\V{x} - \V{b}||^2 = 0$ and taking its partial derivative with respect to $C \text{and } D$}	
+					\frac{\partial ||\V{e}||^2}{\partial C} = 2(C+D\cdot(0) - 6) + 2(C+D\cdot(1)) + 2(C+D\cdot(2)) = 0 \\
+					\frac{\partial ||\V{e}||^2}{\partial D} = 2(C+D\cdot(1)) = 0 
+				\intertext{Reduction will yield $A^T A$:}
+					3C + 3D = 6 \\
+					3C + 5D = 0
+				\intertext{Solution:}
+					\hat{\V{x}} = \begin{bmatrix} 5 \\ -3\end{bmatrix} 
+			\end{gather*}
+	\end{example}
 
+	\begin{remark}
+		The least squares solution $\hat{\V{x}}$ makes $E = ||A\V{x} - \V{b}||^2$ as small as possible.
+	\end{remark}
+
+	\begin{remark}
+		The partial derivatives of $||A\V{x} - \V{b}||^2$ are zero when $A^T A \hat{\V{x}} = A^T \V{b}$.
+	\end{remark}
+	
+	
 
 
 

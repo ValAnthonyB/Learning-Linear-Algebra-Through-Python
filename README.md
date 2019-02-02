@@ -14,3 +14,7 @@ In this repository, I code up some essential concepts in linear algebra from **G
 * Matrix Inverse
 * LU and LDU factorization
 * Transpose
+
+***03 Projections and Least Squares***
+* Gram-Schmidt
+* Fitting data points using least squares
