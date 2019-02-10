@@ -1,0 +1,266 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,array, amssymb,amsfonts, cancel, enumitem, fancyhdr, color, comment, graphicx, environ}
+
+\setlist[description]{leftmargin=\parindent,labelindent=\parindent}
+
+\author{Val Anthony Balagon}
+\date{February 2019}
+\title{Chapter 5: Determinants}
+
+%User commands
+\newcommand{\R}[1]{$\mathbb{R}^{#1}$}
+\newcommand{\Vector}[1]{$\textbf{#1}$}
+\newcommand{\V}[1]{\textbf{\textit{#1}}}
+
+\newcommand{\DefinitionSpace}{\vspace{15px}}
+
+
+\newtheorem*{remark}{Remark}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\newtheorem{example}{Example}
+\newtheorem{theorem}{Theorem}
+
+\newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
+
+
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+
+
+\begin{document}
+	\maketitle
+	\begin{abstract}
+		This chapter focuses on properties, and methods on computing determinants.
+	\end{abstract}
+
+\section{Properties of Determinants}
+	Any square matrix, invertible or not, has a special number that contains a lot of information called the \textbf{determinant}. It tells immediately if a matrix is invertible or not since \textbf{a singular matrix has a determinant of zero}. When $A$ is invertible, the determinant of $A^{-1}$ is $\frac{1}{\det(A)}$. There are three common ways to compute for the determinant. These are the following:
+	
+		{\centering
+			\begin{enumerate}
+				\item Pivot formula
+				\item ``Big" formula
+				\item Cofactor formula
+		\end{enumerate}}
+	
+	\noindent The determinant is written in 2 ways, $\det(A) \text{ and } |A|$. The determinant of \[A \begin{bmatrix} a & b \\ c & d \end{bmatrix} \text{\quad is\quad} \begin{vmatrix}a & b \\ c & d\end{vmatrix} = ad - bc.\]
+	
+\paragraph{Property 1}
+Determinant of a square identity matrix is 1.
+	\[\det{I} = 1 \text{\quad and\quad} \begin{vmatrix}
+									1   &   & \\
+									& \ddots& \\
+									&       & 1 
+								\end{vmatrix} = 1\]
+
+
+\paragraph{Property 2}
+The determinant changes sign when two rows are exchanged.
+	\[\begin{vmatrix}
+		c & d\\
+		a & b
+	 \end{vmatrix} = - \begin{vmatrix}
+						 a & b \\
+						 c & d
+						 \end{vmatrix}\]
+	\begin{example}
+		\[
+		\begin{vmatrix}
+		1 & 0 \\
+		0 & 1
+		\end{vmatrix} = 1 \rightarrow \begin{vmatrix}
+										0 & 1 \\
+										1 & 0
+										\end{vmatrix} = -1
+										\]
+	\end{example}
+	In the earlier chapters, we know that row exchanges can be performed by multiplying matrix $A$ with a permutation matrix $P$. $\det(P) = +1$ for \textbf{even} number of row exchanges and $\det(P) = -1$ for \textbf{odd} row exchanges.
+
+\paragraph{Property 3}
+The determinant is a linear function or operator for each row. If the first row is multiplied by $t$, the determinant is multiplied by $t$.
+	\begin{example}
+		\begin{gather*}
+			\begin{vmatrix}
+				ta & tb \\
+				c & d		
+			\end{vmatrix} = tad - tbc = t(ad - bc) = t \begin{vmatrix}
+														a & b \\
+														c & d		
+														\end{vmatrix}
+		\end{gather*}
+	\end{example}
+	
+	
+	\begin{example}
+		\begin{gather*}
+			\begin{vmatrix}
+				a+a' & b+b' \\
+				c & d		
+			\end{vmatrix} = (a+a')d - (b+b')c = (ad-bc) + (a'd - b'c) = \begin{vmatrix}
+																			a & b \\
+																			c & d		
+																			\end{vmatrix} + \begin{vmatrix}
+																								a' & 'b \\
+																								c & d		
+																								\end{vmatrix}
+		\end{gather*}
+	\end{example}
+
+	\begin{example}
+		\begin{align*}
+			\begin{vmatrix}
+				a+a' & b+b' \\
+				tc & td		
+			\end{vmatrix} &= (a + a')td - (b + b')tc \\
+			              &= t\left[ ad + a'd - bc - b'c \right] \\
+			              &=  t\left[ (ad- bc)  + (a'd - b'c )\right]
+		\end{align*}
+	\end{example}
+
+	\begin{gather*}
+		\det(A^2) = (\det(A))^2 \\
+		\det(2A) = 2^n \det(A)
+		\end{gather*}
+
+
+\paragraph{Property 4}
+If two rows are equal, the determinant is zero.
+	\begin{example}
+		\begin{gather*}
+			\begin{vmatrix}
+				a & b \\
+				a & b 
+			\end{vmatrix} = ab - ab = 0
+		\end{gather*}
+	\end{example}
+
+	If we perform a row exchange we still get the same matrix but because of rule 2 the determinant must change signs. We get $-D = D$, and the only way that this is consistent is when $D = 0$. A matrix with two equal rows has no inverse (matrix is singular). 
+	
+	
+	
+\paragraph{Property 5}
+Elimination from $A$ to $U$ does not change the value of the determinant. Hence $\det(A) = \det(U)$.
+
+	\begin{example}
+		\begin{align*}
+			\begin{vmatrix}
+				a & b\\
+				c - la & d - lb
+			\end{vmatrix} &= a(d - lb) - b(c - la) \\
+						  &= ad - \cancel{alb} - bc + \cancel{alb} \\
+						  &= ad - bc \\
+						  &= \begin{vmatrix}
+						  			a & b\\
+						  			c & d
+						     \end{vmatrix}
+		\end{align*}
+	\end{example}
+
+\paragraph{Property 6}
+A matrix with a row of zeros has a determinant of zeros.
+
+
+\paragraph{Property 7}
+The determinant of an upper triangular matrix is the product of the diagonal entries.
+	\begin{align*}
+		U &= \begin{bmatrix}
+				a_{11} & \dagger & \ldots & \dagger \\
+				0   & \ddots  & \vdots & \dagger \\
+				\vdots  & \ddots  & \ddots & \vdots \\
+				0 & \ldots & 0  & a_{nn}
+			\end{bmatrix} \\
+		\det{U} &= \prod_{i=1}^{n} a_{ii}
+	\end{align*}
+	
+	
+To verify property 1, we simply multiply the diagonals of an identity matrix and $\det(I) = 1$. If there is a zero in the diagonal, then the determinant is zero. 
+
+
+\paragraph{Property 8}
+If $A$ is a singular matrix, then $\det(A) = 0$. If $A$ is invertible then $\det(A) \ne 0$. This is evident in singular matrices when we do elimination from $A$ to $U$ and we get a row of zeros and via rule 6 the determinant is zero. If $A$ is invertible then $U$ has pivots along its diagonal. The product of nonzero pivots gives a nonzero determinant.
+	\begin{gather*}
+		\det(A) = \pm \det(U) = \pm (\text{\textbf{product of the pivots}}) 
+	\end{gather*}
+
+\noindent The pivots of a $2\times2$ matrix are $a$ and $d - (c/a)b$.
+	\begin{gather*}
+			\begin{vmatrix}
+				a & b\\
+				c & d
+				\end{vmatrix} = \begin{vmatrix}
+									a & b\\
+									0 & d - (c/a)b
+									\end{vmatrix} = ad - bc
+	\end{gather*} The sign in $\pm \det(U)$ depends on whether the number of row exchanges is even or odd: +1 or -1 is the determinant of the permutation $P$ that exchanges rows. With no row exchanges, $P = I$ and $\det(A) = \det(U)$.
+		\begin{gather*}
+			PA = LU \\
+			\det(P) \det(A) = \det(L) \det(U)
+		\intertext{$\det(P) = \det(I) = 1$ and $L$'s diagonal only contains ones, hence $\det(L)=1$.}
+			\det(A) = \det(U)
+		\end{gather*}
+
+
+
+\paragraph{Property 9} The determinant of $AB$ is: \[\det(AB) = \det(A) \det(B).\] From this property, we can calculate the inverse.
+	\begin{gather*}
+		A A^{-1} = I \\
+		\det(A)\det(A^{-1}) = 1 \\
+		\boxed{\det(A^{-1}) = \frac{1}{\det(A)}}
+	\end{gather*}
+	
+	To prove this property, suppose we have two $2\times2$ matrices $A$ and $B$.
+		\[A = \begin{vmatrix}
+				a & b\\
+				c & d
+				\end{vmatrix} \text{ \qquad } B = \begin{vmatrix}
+														p & q\\
+														r & s
+														\end{vmatrix}\]
+		\begin{align*}
+			|A||B| &= (ad -bc)(ps - qr) \\
+				   &= (ap + br)(cq + ds) - (aq+bs)(cp+dr) = |AB|
+		\end{align*}	
+
+
+
+
+\paragraph{Property 10}
+The determinant of the transpose is equal to the determinant of the original matrix.
+	\begin{gather*}
+		\det(A^T) = \det(A) \\
+	\end{gather*}
+	
+	\begin{proof}
+		Say $A$ is invertible and we do not have any row exchanges, then $P = I$.
+		\begin{gather*}
+			PA = LU \\
+			A^T P^T = U^T L^T \\
+			\det(A^T)\det(P^T) = \det(U^T)\det(L^T)
+		\intertext{$L^T$ has ones in the diagonal then its determinant is 1. Same with the determinant of $P^T$.}
+			\det(A^T) = \det(U^T)
+		\end{gather*}
+		$U$ and $U^T$ have the same diagonals, therefore $A$ and $A^T$ have the same determinants.
+	\end{proof}
+
+	\begin{example}
+		\begin{align*}
+			\begin{vmatrix}
+			a & c \\
+			b & d
+			\end{vmatrix} &= \begin{vmatrix}
+								a & b\\ 
+								c & d
+								\end{vmatrix} \\
+			ad - bc &= ad - bc
+		\end{align*}
+	\end{example}
+
+
+
+\end{document}
