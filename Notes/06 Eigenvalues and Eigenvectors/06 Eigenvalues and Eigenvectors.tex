@@ -1,0 +1,49 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,array, amssymb,amsfonts, cancel, enumitem, fancyhdr, color, comment, graphicx, environ}
+
+\setlist[description]{leftmargin=\parindent,labelindent=\parindent}
+
+\author{Val Anthony Balagon}
+\date{February 2019}
+\title{Chapter 6: Eigenvalues and Eigenvectors}
+
+%User commands
+\newcommand{\R}[1]{$\mathbb{R}^{#1}$}
+\newcommand{\Vector}[1]{$\textbf{#1}$}
+\newcommand{\V}[1]{\textbf{\textit{#1}}}
+
+\newcommand{\DefinitionSpace}{\vspace{15px}}
+
+
+\newtheorem*{remark}{Remark}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\newtheorem{example}{Example}
+\newtheorem{theorem}{Theorem}
+
+\newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
+
+
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+
+
+\begin{document}
+	\maketitle
+	\begin{abstract}
+		This chapter focuses on eigenvalues and eigenvectors.
+	\end{abstract}
+
+The system $A\V{x} = \V{b}$ is in equilibrium and steady state. Change as in time enters the picture - continuous time in a differential equation $\frac{d\V{u}}{dt} = A\V{u}$ or time steps in a difference equation $\V{u}_{k+1} = A\V{u}_k$. Using linear algebra, eigenvalues and eigenvectors allow these types of systems to be solved beautifully.
+
+Vectors $\V{x}$ when multiplied by $A$ usually change direction. But there are certain exceptional vectors that maintain the same direction as $A\V{x}$ and these are called ``eigenvectors."
+
+
+
+
+\end{document}

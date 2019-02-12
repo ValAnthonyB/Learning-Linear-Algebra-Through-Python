@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.4.5)  12 FEB 2019 00:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.4.5)  13 FEB 2019 00:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"./05 Determinants.tex"
-(./05 Determinants.tex
+**"./06 Eigenvalues and Eigenvectors.tex"
+(./06 Eigenvalues and Eigenvectors.tex
 LaTeX2e <2017-04-15>
 Babel <3.10> and hyphenation patterns for 5 language(s) loaded.
 (c:/texlive/2017/texmf-dist/tex/latex/base/article.cls
@@ -214,8 +214,8 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \c@example=\count105
 \c@theorem=\count106
 
-(./05 Determinants.aux)
-\openout1 = `"05 Determinants.aux"'.
+(./06 Eigenvalues and Eigenvectors.aux)
+\openout1 = `"06 Eigenvalues and Eigenvectors.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
 LaTeX Font Info:    ... okay on input line 36.
@@ -334,45 +334,28 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 37.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{c:/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5]
-
-<crossproduct_geometry.png, id=32, 678.28406pt x 575.14874pt>
-File: crossproduct_geometry.png Graphic file (type png)
-
-<use crossproduct_geometry.png>
-Package pdftex.def Info: crossproduct_geometry.png used on input line 338.
-(pdftex.def)             Requested size: 203.48679pt x 172.54594pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[6] [7 <./crossproduct_geometry.png>] (./05 Determinants.aux) ) 
+{c:/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(./06 Eigenvalues and Eigenvectors.aux) ) 
 Here is how much of TeX's memory you used:
- 3610 strings out of 494893
- 49101 string characters out of 6179935
- 122258 words of memory out of 5000000
- 6839 multiletter control sequences out of 15000+600000
- 16369 words of font info for 61 fonts, out of 8000000 for 9000
+ 3581 strings out of 494893
+ 48820 string characters out of 6179935
+ 114257 words of memory out of 5000000
+ 6816 multiletter control sequences out of 15000+600000
+ 13796 words of font info for 52 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 39i,18n,43p,444b,271s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/texlive/2017
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2017/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2017/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmex10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmmi12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmmi8.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-<c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texliv
-e/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2017/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2017/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmsy8.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmti12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/lat
-xfont/line10.pfb>
-Output written on "05 Determinants.pdf" (7 pages, 173592 bytes).
+ 39i,6n,43p,404b,195s stack positions out of 5000i,500n,10000p,200000b,80000s
+<c:/texlive/2017/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmbxti10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
+8.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/
+texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/20
+17/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2017/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr8.pfb>
+Output written on "06 Eigenvalues and Eigenvectors.pdf" (1 page, 79798 bytes).
 PDF statistics:
- 85 PDF objects out of 1000 (max. 8388607)
- 60 compressed objects within 1 object stream
+ 40 PDF objects out of 1000 (max. 8388607)
+ 28 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
