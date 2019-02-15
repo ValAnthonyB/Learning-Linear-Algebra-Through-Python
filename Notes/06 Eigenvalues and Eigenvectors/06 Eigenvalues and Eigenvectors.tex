@@ -1,6 +1,6 @@
 \documentclass[12pt, letterpaper]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amsthm,array, amssymb,amsfonts, cancel, enumitem, fancyhdr, color, comment, graphicx, environ}
+\usepackage{amsmath,amsthm,array, amssymb,amsfonts, cancel, enumitem, fancyhdr, color, comment, graphicx, environ, mathtools}
 
 \setlist[description]{leftmargin=\parindent,labelindent=\parindent}
 
@@ -12,9 +12,11 @@
 \newcommand{\R}[1]{$\mathbb{R}^{#1}$}
 \newcommand{\Vector}[1]{$\textbf{#1}$}
 \newcommand{\V}[1]{\textbf{\textit{#1}}}
+\newcommand{\trace}[1]{\text{trace$(#1)$}}
+
 
 \newcommand{\DefinitionSpace}{\vspace{15px}}
-
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
 \newtheorem*{remark}{Remark}
 
@@ -36,14 +38,748 @@
 \begin{document}
 	\maketitle
 	\begin{abstract}
-		This chapter focuses on eigenvalues and eigenvectors.
+		This chapter focuses on the properties of eigenvalues and eigenvectors, diagonalizing a matrix, systems of differential equations, symmetric matrices, and positive definite matrices.
 	\end{abstract}
 
+\section{Introduction}
 The system $A\V{x} = \V{b}$ is in equilibrium and steady state. Change as in time enters the picture - continuous time in a differential equation $\frac{d\V{u}}{dt} = A\V{u}$ or time steps in a difference equation $\V{u}_{k+1} = A\V{u}_k$. Using linear algebra, eigenvalues and eigenvectors allow these types of systems to be solved beautifully.
 
-Vectors $\V{x}$ when multiplied by $A$ usually change direction. But there are certain exceptional vectors that maintain the same direction as $A\V{x}$ and these are called ``eigenvectors."
+	\DefinitionSpace
+	\begin{example}
+		Say we have a matrix $A = \begin{bmatrix}
+									.8 & .3 \\ .2 & .7
+									\end{bmatrix}$, calculate $A^2, A^3, \text{ and } A^100$.
+				\begin{gather*}
+					A^2 = \begin{bmatrix}.70 & .30 \\ .30 & .55\end{bmatrix} \quad A^3 = \begin{bmatrix}.650 & .525 \\ .350 & .475\end{bmatrix} \quad A^{100} \approx \begin{bmatrix}.60 & .60 \\ .40 & .40\end{bmatrix}
+				\end{gather*}
+		\noindent One way is to solve these equations using eigenvalues.
+	\end{example}
+	\DefinitionSpace
+Vectors $\V{x}$ when multiplied by $A$ usually change direction. But there are certain exceptional vectors that maintain the same direction as $A\V{x}$ and these are called ``eigenvectors." The basic equation is \begin{equation}A \V{x} = \lambda \V{x} \label{eig_prob} \end{equation} where the number $\lambda$ is an eigenvalue of $A$ and $\V{x}$ is an eigenvector of $A$.
+
+	\DefinitionSpace
+	\begin{example}
+		What are the eigenvalues an eigenvectors of \[A = \begin{bmatrix}
+														.8 & .3 \\
+														.2 & .7
+														\end{bmatrix}?\]
+		\begin{align*}
+			\det(A - \lambda I) &= 0 \\
+			\det(\begin{bmatrix} .8 & .3 \\	.2 & .7	\end{bmatrix} -  \begin{bmatrix} \lambda & 0 \\ 0 & \lambda\end{bmatrix}) &= 0 \\
+			\begin{vmatrix}
+				.8 - \lambda & .3 \\	.2 & .7 - \lambda
+			\end{vmatrix} &= 0 \\
+			\lambda^2 -\frac32 \lambda + \frac12 &= 0 \\
+			\left( \lambda - 1 \right) \left( \lambda - \frac12 \right) &=0 \\
+				\lambda_1 = 1 \quad \lambda_2 = \frac12
+		\intertext{$A - \lambda I$ becomes a singular matrix and the eigenvectors $\V{v}_1, \V{v}_2$ are in the nullspaces of $A- I \text{ and } A-\frac12 I$.}	
+			(A - \lambda I)\V{x} = 0\\
+		\intertext{Finding $x_1$,}
+			(A- I)x = 0 \\
+			\begin{bmatrix}
+			-.2 & .3 \\	.2 & -.3 
+			\end{bmatrix} \V{x}_1 &= 0 \\
+			\V{x}_1 &= \begin{bmatrix}
+							.6\\.4
+						\end{bmatrix}
+		\intertext{Finding $x_2$,}
+			(A- \frac12 I)x = 0 \\
+			\begin{bmatrix}
+			.3 & .3 \\	.2 & .2 
+			\end{bmatrix} \V{x}_2 &= 0 \\
+			\V{x}_2 &= \begin{bmatrix}
+			1\\-1
+			\end{bmatrix}											
+		\end{align*}
+		\begin{align*}
+			\intertext{Checking,}
+			A \V{x}_1 &= \begin{bmatrix}
+							.8 & .3 \\
+							.2 & .7
+							\end{bmatrix} \begin{bmatrix}
+												.6 \\ .4
+												\end{bmatrix} = 1 \begin{bmatrix}
+																	.6 \\ .4
+																	\end{bmatrix} = \lambda_1 \V{x}_1\\
+			A \V{x}_2 &= \begin{bmatrix}
+								.8 & .3 \\
+								.2 & .7
+								\end{bmatrix} \begin{bmatrix}
+													1 \\  -1
+													\end{bmatrix} = \frac{1}{2} \begin{bmatrix}
+																					1 \\ -1
+																					\end{bmatrix} = \lambda_2 \V{x}_2			
+		\end{align*}
+		And if $A$ is multiplied $n$ times we get $A^n \V{x}_1 = \lambda_1^n\V{x}_1$. Same goes for the second eigenvector. Also take note that the columns of $A$ are a combination of the eigenvectors: $c_1\V{x}_1 + c_2\V{x}_2$. The eigenvector $\V{x}_1$ is a \textit{steady state} because $\lambda_1 = 1$. The eigenvector $\V{x}_2$ is a \textit{decaying mode} that virtually disappears because $\lambda_2=.5$. The higher the power of $A$, the more closely its columns approach the steady state. $A$ is an example of a \textbf{Markov Matrix} where the sum of the entries for each column equal to one.
+	\end{example}
+	\DefinitionSpace
+	
+		\begin{definition}
+			If $A$ is multiplied $n$ times, the eigenvectors stay the same and the eigenvalues are also multiplied $n$ times.
+		\end{definition}
+
+\subsection{Equation for Eigenvalues}
+     To solve for the eigenvalues and eigenvectors, we start with Equation \eqref{eig_prob}.
+		\begin{gather*}
+			A\V{x} = \lambda \V{x} \\
+			A\V{x} - \lambda \V{x} = \textbf{0}\\
+			\boxed{(A - \lambda I) \V{x} = \textbf{0}} \numberthis \label{eigvector_eq} 
+		\intertext{The eigenvectors of $\V{x}$ make up the nullspace of $A - \lambda I$. If we find the eigenvalue $\lambda$ we can calculate for the eigenvector. To solve for the eigenvalue, we know that $A-\lambda I$ is a singular matrix. Therefore its determinant is zero.}
+			\boxed{\det(A - \lambda I) = p(\lambda) = 0} \numberthis \label{charateristic_eq} 
+		\intertext{$\det(A - \lambda I) = 0$ is called the \textbf{characteristic polynomial}. Generally, the characteristic polynomial is the following:} 
+			p(\lambda) = (-\lambda)^n + \text{trace$(A)$}(-\lambda)^{n-1} + \ldots + \det(A)
+		\intertext{To get the eigenvalues, we solve for $\lambda$. When $A$ is an $n \times n$ matrix, Equation \ref{charateristic_eq} has degree $n$. $A$ has $n$ eigenvalues and repeating $\lambda$ are possible. Each $\lambda$ leads to $\V{x}$. \textbf{For each $\lambda$, solve $(A - \lambda I)\V{x} = 0$ to find the eigenvector}.}
+		\end{gather*}
+		
+		\begin{example}
+			Find the eigenvalues and eigenvectors of the singular matrix: $A = \begin{bmatrix}
+															1 & 2\\
+															2 & 4
+												   		\end{bmatrix}$.
+							\begin{gather*}
+								\det(A - \lambda I) = 0 \\
+								\det\left( \begin{bmatrix}
+												1 & 2\\
+												2 & 4
+												\end{bmatrix} - \begin{bmatrix}
+																	\lambda & 0\\
+																	0 & \lambda
+																	\end{bmatrix} \right) = 0 \\
+								\det\left( \begin{bmatrix}
+											1-\lambda & 2\\
+											2 & 4-\lambda
+											\end{bmatrix}\right) = 0 \\
+								\lambda(\lambda - 5) = 0 \\
+								\lambda_1 = 0 \qquad \lambda_2 = 5
+							\intertext{For the first eigenvector $\V{x}_1$:}
+								(A - \lambda_1 I)\V{x}_1 = 0 \\
+								(A - 0I)\V{x}_1 = 0 \\
+								\begin{bmatrix}
+										1 & 2\\
+										2 & 4
+										\end{bmatrix}\begin{bmatrix}
+															x_1 \\ x_2
+															\end{bmatrix} = 0 \\
+							\intertext{The nullspace solution is:}
+								\V{x}_1 = \begin{bmatrix}
+												x_1 \\ x_2
+												\end{bmatrix} = \begin{bmatrix}
+																	2 \\ -1
+																	\end{bmatrix}
+							\intertext{For the second eigenvector $\V{x}_2$:}
+								(A - \lambda_2 I)\V{x}_2 = 0 \\
+								(A - 5I)\V{x}_2 = 0 \\
+								\begin{bmatrix}
+								-4 & 2\\
+								2 & -1
+								\end{bmatrix}\begin{bmatrix}
+													x_1 \\ x_2
+													\end{bmatrix} = 0 \\
+							\intertext{The nullspace solution is:}
+								\V{x}_2 = \begin{bmatrix}
+												x_1 \\ x_2
+												\end{bmatrix} = \begin{bmatrix}
+																	1 \\ 2
+																	\end{bmatrix}
+							\intertext{If $A$ is a singular matrix, $\lambda = 0$ is an eigenvalue of $A$.}
+							\end{gather*}
+		\end{example}
+		
+		
+	\paragraph{Summary} To solve the eigenvalue problem for an $n \times n$ matrix, follow these steps:
+		\begin{enumerate}
+			\item \textbf{Compute the determinant of} $A - \lambda I$. With $\lambda$ subtracted along the diagonal, this determinant starts with $\lambda^n$ or $-\lambda^n$. It's a polynomial of degree $n$.
+			\item \textbf{Find the roots of this polynomial}, by solving $\det(A - \lambda I) = 0$. The $n$ roots are the $n$ eigenvalues of $A$. They make $A - \lambda I$ singular.
+			\item For each eigenvalue $\lambda$, \textbf{solve $(A-\lambda I)\V{x} = 0$ to find the eigenvector $\V{x}$}.
+		\end{enumerate}
+	\DefinitionSpace
+	\paragraph{Warning!} There are times when $A$ has equal eigenvalues. Hence, there is only one line of eigenvectors. Without a full set of eigenvectors, we can't diagonalize a matrix without $n$ independent eigenvectors.
+		
+		
+\subsection{Determinant and Trace}
+We cannot get the eigenvalues of $A$ when we do elimination to $U$ because elimination does not preserve the eigenvalues. $U$ has its own set of eigenvalues along its diagonal (the pivots) but these aren't the eigenvalues of $A$. The product $\lambda_1 \times \lambda_2 \times \ldots \times \lambda_n$ and the sum $\lambda_1 + \lambda_2 + \ldots + \lambda_n$ can be found directly from the matrix $A$.
+	\begin{equation}
+		A = \begin{bmatrix}
+				1 & 3 \\
+				2 & 6
+			\end{bmatrix} \quad \text{has eigenvalues }\lambda=0, \lambda=7
+	\end{equation}
+For $A$, the product of the eigenvalues is $0 \cdot 7 = 0$. This agrees with the $\det(A) = 0$. The sum of the eigenvalues $0 + 7$ agrees with the sum down the diagonal of $A$. The sum of the diagonal entries of $A$ is called the \textbf{trace}. These two properties are important checks to see if our calculations for the eigenvalues are correct.
+
+		\DefinitionSpace
+		
+		\begin{theorem}
+			The product of the $n$ eigenvalues equals the determinant of matrix $A$.
+				\begin{equation}
+					\lambda_1 \times \lambda_2 \times \ldots \times \lambda_n = \det(A) \\
+				\end{equation}
+		\end{theorem}
+	
+		\begin{proof}
+			\begin{gather*}
+			\intertext{Consider $\det(A - \lambda I)$,}
+				\det(A - \lambda I) = p(\lambda)
+			\intertext{Factorizing the characteristic equation according to its individual roots.}
+				p(\lambda) = (\lambda_1 - \lambda)(\lambda_2 - \lambda)\ldots(\lambda_n - \lambda)
+			\intertext{Setting $\lambda = 0$, therefore}
+				\det(A) = \lambda_1 \lambda_2 \ldots \lambda_n
+			\end{gather*}
+		\end{proof}
+	
+		\DefinitionSpace
+		\begin{theorem}
+			The sum of the $n$ eigenvalues equals the sum of the $n$ diagonal entries of $A$ (the trace). 
+				\begin{equation}
+					\lambda_1 + \lambda_2 + \ldots + \lambda_n = a_{11} + a_{22} + \ldots + a_{nn} = \text{\textbf{trace}$(A)$}
+				\end{equation}
+		\end{theorem}
+	
+		\begin{proof}
+				Consider the general equation of the characteristic polynomial $p(\lambda)$.
+					\begin{gather*}
+						p(\lambda) = (-\lambda)^n + \text{trace$(A)$}(-\lambda)^{n-1} + \ldots + \det(A)
+					\intertext{Another expression of the characteristic polynomial is:}
+						p(\lambda) = (\lambda_1 - \lambda)(\lambda_2 - \lambda)\ldots(\lambda_n - \lambda)
+					\intertext{By \textit{comparing coefficients}, we get the trace:}
+						\text{trace$(A)$} = \lambda_1 + \lambda_2 + \ldots + \lambda_n
+					\end{gather*}
+		\end{proof}
+	
+		\begin{example}
+			To see the proof above clearly, here is an example where there are two eigenvalues:
+			\begin{gather*}
+				p(\lambda) = \lambda_2 - \trace{A}\lambda + \det(A)
+			\intertext{$p(\lambda)$ can also be expressed with the following:}
+				p(\lambda) = (\lambda_1 - \lambda)(\lambda_2 - \lambda) = \lambda_1\lambda_2 - (\lambda_1 + \lambda_2)\lambda + \lambda^2
+			\intertext{By comparing coefficients, we get the trace:}
+				\trace{A} = \lambda_1 + \lambda_2
+			\end{gather*}
+		\end{example}
+		
+		
+		\DefinitionSpace
+		\begin{theorem}
+			The eigenvalues of a triangular matrix lie along its diagonal.
+		\end{theorem}
+		\begin{proof}
+			Suppose $A$ is a triangular matrix with nonzero entries. \[A = \begin{bmatrix}
+																				a_{11} &         & \\
+																		   			   & \ddots  & \\
+																		  			   &         & a_{nn}
+																				\end{bmatrix}\]
+				\begin{gather*}
+				\intertext{Consider the determinant of $A - \lambda I$,}
+					\det(A - \lambda I) = \begin{vmatrix}
+												a_{11} - \lambda&         & \\
+													            & \ddots  & \\
+													            &         & a_{nn} - \lambda
+										  \end{vmatrix} = p(\lambda)
+				\intertext{Where $p(\lambda)$ is the characteristic equation. The roots of the characteristic equation are the eigenvalues. The determinant of $A - \lambda I$ is 0 by definition because it is a singular matrix.}
+					\begin{vmatrix}
+					a_{11} - \lambda&         & \\
+					& \ddots  & \\
+					&         & a_{nn} - \lambda
+					\end{vmatrix} = 0
+				\intertext{The determinant of a triangular matrix is the product of its diagonal entries. Hence,}
+					\det(A - \lambda I) = \prod_{i=1}^{n} (a_{ii} - \lambda) = 0
+				\intertext{Therefore, each diagonal entry in $A$ is an eigenvalue.}
+					a_{ii} = \lambda
+				\end{gather*}
+		\end{proof}
+	
+		
+\section{Diagonalizing a Matrix}		
+		Eigenvalues and eigenvectors make matrix multiplication easier. When \V{x} is an eigenvector, multiplication by $A$ is just a multiplication by a number $\lambda$: $A\V{x} = \lambda \V{x}$. Diagonalizing a matrix turns $A$ into a diagonal matrix $\Lambda$ when we use the eigenvectors properly.
+		
+		\DefinitionSpace
+		\begin{definition}
+			Suppose the $n \times n$ matrix $A$ has $n$ linearly independent eigenvectors $x_1, \ldots, x_n$. Put them into the columns of an eigenvector matrix $X$. Then $X^{-1} A X$ is the \textbf{eigenvalue matrix} $\Lambda$:
+				\begin{equation}
+					X^{-1} A X = \Lambda = \begin{bmatrix}
+											\lambda_1 & & \\
+											& \ldots & \\
+											&  & \lambda_n
+										  \end{bmatrix}
+				\end{equation}
+		\end{definition}
+		\DefinitionSpace
+		
+		\begin{example}
+			Diagonalize $A = \begin{bmatrix}
+								1 & 5 \\
+								0 & 6
+								\end{bmatrix}$
+			\begin{align*}
+				\intertext{$A$ is a triangular matrix, therefore its eigenvalues are $\lambda_1 = 1$ and $\lambda_2=6$. We then find its eigenvectors. Finding $\V{x}_1$:}
+					(A - \lambda_1 I)\V{x}_1 &= 0 \\
+					\left( \begin{bmatrix}
+								1 & 5 \\
+								0 & 6
+								\end{bmatrix} - \begin{bmatrix}
+													1 & 0 \\
+													0 & 1
+													\end{bmatrix}\right) \V{x}_1 &= \begin{bmatrix}
+																					0 \\ 0 
+																					\end{bmatrix} \\
+					\begin{bmatrix}
+						0 & 5 \\
+						0 & 5
+						\end{bmatrix}\V{x}_1 &=  \begin{bmatrix}
+												0 \\ 0 
+												\end{bmatrix} \\
+							\V{x}_1 &= \begin{bmatrix}
+										1 \\ 0 
+										\end{bmatrix}
+				\intertext{Finding $\V{x}_2$,}
+					(A - \lambda_2 I)\V{x}_2 &= 0 \\
+					\left( \begin{bmatrix}
+								1 & 5 \\
+								0 & 6
+								\end{bmatrix} - \begin{bmatrix}
+													6 & 0 \\
+													0 & 6
+													\end{bmatrix}\right) \V{x}_2 &= \begin{bmatrix}
+																						0 \\ 0 
+																						\end{bmatrix} \\
+					\begin{bmatrix}
+					-5 & 5 \\
+					0 & 0
+					\end{bmatrix}\V{x}_2 &=  \begin{bmatrix}
+												0 \\ 0 
+												\end{bmatrix} \\
+					\V{x}_2 &= \begin{bmatrix}
+									1 \\ 1
+									\end{bmatrix}
+			\end{align*}
+			\begin{align*}
+				\intertext{Diagonalizing:}
+						X^{-1} A X &= \Lambda \\
+						\begin{bmatrix}
+							1 & -1 \\
+							0 & 1
+						\end{bmatrix} \begin{bmatrix}
+											1 & 5 \\
+											0 & 6
+											\end{bmatrix}\begin{bmatrix}
+															1 & 1 \\
+															0 & 1
+															\end{bmatrix} &= \begin{bmatrix}
+																				1 & 0 \\
+																				0 & 6
+																				\end{bmatrix}
+			\end{align*}
+		\end{example}
+	
+	
+		\begin{theorem}
+			$A^n$ has the same eigenvectors in $X$ and the eigenvalues raised to the power of $n$ in $\Lambda^n$.
+		\end{theorem}
+		\begin{proof}
+			\begin{gather*}
+				A^2 = X \Lambda \cancel{X^{-1}X} \Lambda X^{-1} = X \Lambda^2 X^{-1} \\
+				A^3 = X \Lambda \cancel{X^{-1}X} \Lambda \cancel{X^{-1} X} \Lambda X^{-1} = X^{-1} \Lambda^3 X \\
+				\vdots \\
+				\text{etc.}
+			\end{gather*}
+		\end{proof}
+		
+		The matrix $X$ must have an inverse because its columns are linearly independent. \textbf{Without $n$ independent eigenvectors, we can't diagonalize}.
+		
+		\begin{remark}
+			Suppose the eigenvalues $\lambda_1,\ldots,\lambda_n$ are all different. Then it is automatic that the eigenvectors $\V{x}_1,\ldots,\V{x}_n$ are independent. The eigenvector matrix $X$ will be invertible. \textbf{Any matrix that has no repeated eigenvalues can be diagonalized}.
+		\end{remark}
+	
+		\begin{remark}
+			\textbf{We can multiply eigenvectors by any nonzero constants}. $A(c\V{x}) = \lambda (c\V{x})$ is still true.
+		\end{remark}
+
+		\begin{remark}
+			The eigenvectors in $X$ come in the same order as the eigenvalues in $\Lambda$.
+		\end{remark}
+	
+		\begin{remark}
+			Matrices that have repeated eigenvalues cannot be diagonalized.
+		\end{remark}
+	
+		\DefinitionSpace
+		\begin{example}
+			The Markov matrix $A = \begin{bmatrix} .8 & .3 \\ .2 & .7 \end{bmatrix}$ has eigenvalues $\lambda_1=1$ and $\lambda_2=.5$ and eigenvectors of $\V{x}_1 = \begin{bmatrix} .6 \\ .4 \end{bmatrix}$ and $\V{x}_2 = \begin{bmatrix} 1 \\ -.6 \end{bmatrix}$. Find $A^2, A^k, \text{ and } A^{\infty}$.
+				\begin{gather*}
+					A = \begin{bmatrix} .6 & 1 \\ .4 &-1 \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 0 & .5 \end{bmatrix}  \begin{bmatrix} 1 & 1 \\ .4 & -.6 \end{bmatrix} = X \Lambda X^{-1} 
+				\intertext{Computing for $A^2$.}
+					A^2 = \begin{bmatrix} .6 & 1 \\ .4 &-1 \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 0 & .5^2 \end{bmatrix}  \begin{bmatrix} 1 & 1 \\ .4 & -.6 \end{bmatrix} = \begin{bmatrix} 0.7&0.45\\ 0.3&0.55 \end{bmatrix}
+				\intertext{Computing for $A^k$.}
+					A^k = \begin{bmatrix} .6 & 1 \\ .4 &-1 \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 0 & .5^k \end{bmatrix}  \begin{bmatrix} 1 & 1 \\ .4 & -.6 \end{bmatrix}
+				\intertext{Computing for $A^\infty$}
+					A^\infty = \begin{bmatrix} .6 & 1 \\ .4 &-1 \end{bmatrix} \lim\limits_{k\rightarrow \infty} \left( \begin{bmatrix} 1^k & 0 \\ 0 & .5^k \end{bmatrix} \right)  \begin{bmatrix} 1 & 1 \\ .4 & -.6 \end{bmatrix} = \begin{bmatrix} .6 & 1 \\ .4 &-1 \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}  \begin{bmatrix} 1 & 1 \\ .4 & -.6 \end{bmatrix} = \begin{bmatrix}0.6&0.6\\ 0.4&0.4\end{bmatrix}
+				\end{gather*}
+		\end{example}
+	
+\subsection{Similar Matrices: Same Eigenvalues}
+	Similar matrices have the same $\Lambda$ and different $X$.
+	\begin{theorem}
+		All matrices $A = B C B^{-1}$ are ``similar". They all share the eigenvalues of $C$.
+	\end{theorem}
+	
+\subsection{Fibonacci Numbers}
+	\begin{equation*}
+		0, 1, 1, 2, 3, 5, 8, 13 \ldots
+	\end{equation*}
+	A new Fibonacci number is the sum of the two previous Fibonacci numbers in the Fibonacci sequence. The rule is: $F_{k+2} = F_{k+1} + F_{k}$. The obvious and slow way to get to $F_{100}$ is by applying the rule one at a time. Linear algebra gives a faster method. The one step rule for the Fibonacci sequence is $\V{u}_{k+1} = A \V{u}_k$.
+	 
+	\begin{gather*}
+		\text{Let } \V{u}_k = \begin{bmatrix}F_{k+1} \\ F_{k}\end{bmatrix}\\
+		\intertext{The rules below are put into matrix $A$.}
+			\begin{array}{l}
+			F_{k+2} = F_{k+1} + F_{k} \\
+			F_{k+1} = F_{k+1}
+			\end{array} \\
+			\V{u}_{k+1} = \begin{bmatrix}1 & 1 \\1 & 0\end{bmatrix} \V{u}_k \\ 
+		\intertext{Every step multiplies by $A$. After 100 steps we reach $\V{u}_{100}= A^{100}\V{u}_0$.}
+			\V{u}_0 = \begin{bmatrix} 1 \\ 0\end{bmatrix}, \quad \V{u}_1 = \begin{bmatrix} 1 \\ 1\end{bmatrix}, \quad \V{u}_2 = \begin{bmatrix} 2 \\ 1\end{bmatrix}, \quad \V{u}_3 = \begin{bmatrix} 3 \\ 2\end{bmatrix}, \quad \V{u}_{100} = \begin{bmatrix} F_{101} \\ F_{100} \end{bmatrix}
+		\intertext{Finding the eigenvalues:}
+			\det(A - \lambda I) = \det\left( \begin{bmatrix}1 & 1 \\1 & 0\end{bmatrix} - \begin{bmatrix}\lambda & 0 \\0 & \lambda\end{bmatrix}\right) = \begin{vmatrix}1-\lambda & 1\\ 1 &-\lambda\end{vmatrix} = \lambda^2 - \lambda - 1 \\
+			\lambda_1 = \frac{1 + \sqrt{5}}{2},\quad \lambda_2 = \frac{1 - \sqrt{5}}{2}
+		\intertext{Finding the eigenvector $\V{x}_1$,}
+			(A - \lambda_1 I)\V{x}_1 = \textbf{0} \\
+			\left( \begin{bmatrix}1 & 1 \\1 & 0\end{bmatrix} - \frac{1 + \sqrt{5}}{2} \begin{bmatrix}1 & 0 \\0 & 1\end{bmatrix} \right)\V{x}_1 = \begin{bmatrix}0\\0\end{bmatrix} \\
+			\begin{bmatrix}\frac{1-\sqrt{5}}{2}&1\\ 1&-\frac{1+\sqrt{5}}{2}\end{bmatrix}\V{x}_1 = \begin{bmatrix}0\\0\end{bmatrix} \\
+			\V{x}_1 = \begin{bmatrix} \lambda_1 \\ 1\end{bmatrix} =\begin{bmatrix}  \frac{1+\sqrt{5}}{2} \\ 1\end{bmatrix}
+		\intertext{Finding the eigenvector $\V{x}_2$,}
+			(A - \lambda_2 I)\V{x}_2 = \textbf{0} \\
+			\left( \begin{bmatrix}1 & 1 \\1 & 0\end{bmatrix} - \frac{1 - \sqrt{5}}{2} \begin{bmatrix}1 & 0 \\0 & 1\end{bmatrix} \right)\V{x}_2 = \begin{bmatrix}0\\0\end{bmatrix} \\
+			\begin{pmatrix}\frac{1+\sqrt{5}}{2}&1\\ 1&-\frac{1-\sqrt{5}}{2}\end{pmatrix}\V{x}_2 = \begin{bmatrix}0\\0\end{bmatrix} \\
+			\V{x}_2 = \begin{bmatrix} \lambda_2 \\ 1\end{bmatrix} =\begin{bmatrix}  \frac{1-\sqrt{5}}{2} \\ 1\end{bmatrix}
+		\intertext{We need to express $\V{u}_0$ as a combination of the eigenvectors.}
+			c_1 \V{x}_1 + c_2\V{x}_2= \begin{bmatrix}1\\0\end{bmatrix} \\
+			\begin{bmatrix}\lambda_1 & \lambda_2\\ 1&1\end{bmatrix}\begin{bmatrix}c_1\\c_2\end{bmatrix} = \begin{bmatrix}1\\0\end{bmatrix} \\
+			\begin{bmatrix}c_1\\c_2\end{bmatrix} = \begin{bmatrix}\lambda_1 & \lambda_2\\ 1&1\end{bmatrix}^{-1} \begin{bmatrix}1\\0\end{bmatrix} = \begin{bmatrix}\frac{1}{\lambda_1-\lambda_2}&-\frac{b}{\lambda_1-\lambda_2}\\ -\frac{1}{\lambda_1-\lambda_2}&\frac{\lambda_1}{\lambda_1-\lambda_2}\end{bmatrix}\begin{bmatrix}1\\0\end{bmatrix} \\
+			\begin{bmatrix}c_1\\c_2\end{bmatrix}  = \begin{bmatrix}\frac{1}{\lambda_1-\lambda_2}\\ -\frac{1}{\lambda_1-\lambda_2}\end{bmatrix} = \frac{1}{\lambda_1-\lambda_2}\begin{bmatrix}1\\ -1\end{bmatrix}
+		\intertext{We now have the expression:}
+			\frac{1}{\lambda_1-\lambda_2}\begin{bmatrix}\lambda_1\\ 1\end{bmatrix} - \frac{1}{\lambda_1-\lambda_2}\begin{bmatrix}\lambda_2\\ 1\end{bmatrix} = \begin{bmatrix}1\\ 0\end{bmatrix} = \V{u}_k\\
+			\frac{1}{\lambda_1-\lambda_2}\left( \begin{bmatrix}\lambda_1\\ 1\end{bmatrix} - \begin{bmatrix}\lambda_2\\ 1\end{bmatrix}\right)  = \begin{bmatrix}1\\ 0\end{bmatrix} \\
+			\V{u}_0 = \frac{\V{x}_1 - \V{x}_2}{\lambda_1-\lambda_2}
+		\intertext{Then we have a generalized formula in terms of our eigenvalues:}
+			\V{u}_k = \frac{\lambda^k \V{x}_1 - \lambda^k \V{x}_2}{\lambda_1-\lambda_2}
+		\intertext{To get $100^{\text{th}}$ Fibonacci number, $F_{100}$, we use the second component of $\V{x}_1,\V{x}_2$}
+			F_{100} = \frac{\lambda_1^{100} - \lambda_2^{100}}{\lambda_1 - \lambda_2}
+		\intertext{Which is approximately,}
+			F_{100} \approx 3.54224 \times 10^{20}
+	\end{gather*}
+	
+
+\subsection{Matrix Powers $A^k$}
+	\begin{gather*}
+			A^k \V{u}_0 = (X \Lambda X^{-1})\ldots(X \Lambda X^{-1})\V{u}_0 = X \Lambda^k X^{-1} \V{u}_0
+	\end{gather*}
+	
+	Fibonacci's example is a typical difference equation $\V{u}_{k+1} = A \V{u}_k$. Each step multiplies by $A$. The solution is $\V{u}_{k+1} = A^k \V{u}_0$. Diagonalizing the matrix gives a quick way to compute $A^k$ and find $\V{u}_k$ in three quick steps.
+	
+	\begin{enumerate}
+		\item  Write $\V{u}_0$ as a combination $c_1 \V{x}_1 + \ldots c_n \V{x}_n$ of the eigenvectors. Then $\V{c} = X^{-1}\V{u}_0$.
+		\item Multiply each eigenvector $\V{x}_i$ by $(\lambda_i)^k$. Now we have $\Lambda^k X^{-1}\V{u}_0$.
+		\item Add up the pieces $c_i (\lambda_i)^k\V{x}_i$ to find the solution $\V{u}_k = A^k\V{u}_0$. This is $X \Lambda^k X^{-1}\V{u}_0$.
+	\end{enumerate}
+
+	\begin{align*}
+		\intertext{The solution for $\V{u}_{k+1} = A \V{u}_k$ becomes:}
+			\V{u}_{k+1} &= A \V{u}_k = c_1 (\lambda_1)^k\V{x}_1 + \ldots + c_n (\lambda_n)^k\V{x}_n = X \Lambda^k X^{-1}\V{u}_0= X \Lambda^k \V{c} \\
+			X \Lambda^k \V{c}&= \begin{bmatrix}
+									   |    & \ldots & | \\
+									\V{x}_1 & \ldots & \V{x}_n \\
+									   |    & \ldots & |
+									\end{bmatrix}	\begin{bmatrix}
+													(\lambda_1)^k  &        &  \\
+													      & \ddots &  \\
+													      &        & (\lambda_n)^k
+													\end{bmatrix} \begin{bmatrix}
+																		c_1 \\
+																		\vdots \\
+																		c_n
+																		\end{bmatrix}
+	\end{align*}
+
+\subsection{Nondiagonalizable Matrices}
+When we solve for $\lambda$ and $\V{x}$, we want to know their \textbf{multiplicity}. 
+	\begin{description}
+		\item[Geometric Multiplicity $= \text{GM}$] - Count the independent eigenvectors for $\lambda$. Then GM is the dimension of the nullspace of $A- \lambda I$.
+		\item[Algebraic Multiplicity $= \text{AM}$] - AM counts the repetitions of $\lambda$ among the eigenvalues. Look at the $n$ roots of $\det(A - \lambda I) = 0.$
+	\end{description}
+
+	\begin{example}
+		Find the GM and AM of $A = \begin{bmatrix}0 & 1\\ 0 & 0\end{bmatrix}$
+		\begin{gather*}
+			\det(A - \lambda I) = 0 \\
+			\begin{vmatrix}
+			-\lambda & 1 \\
+			0 & -\lambda 
+			\end{vmatrix} = \lambda^2 = 0 \\
+			\lambda = 0
+		\intertext{The eigenvalue 0 is a repeating eigenvalue. Hence its AM = 2. The eigenvalue 0 only has one eigenvector hence GM = 1.}
+		\end{gather*}
+	\end{example}
 
 
+	\DefinitionSpace
+	\begin{theorem}
+		If $\text{GM} = \text{AM}$, the matrix $A$ is \textbf{diagonalizable}.
+	\end{theorem}
+	\DefinitionSpace
+	\begin{theorem}
+		If $\text{GM} < \text{AM}$, the matrix $A$ is \textbf{not diagonalizable}.
+	\end{theorem}
+	
+
+\section{Systems of Differential Equations}
+We want to solve $\V{u}$ from the following system of differential equations:
+	\begin{gather*}
+		\frac{d\V{u}}{dt} = A \V{u}, \quad \text{starting from the vector $\V{u}(0) = \begin{bmatrix}u_1(0) \\ \vdots \\ u_n(0) \end{bmatrix}$}
+	\end{gather*}
+
+These equations are linear. If $\V{u}(t)$ and $\V{v}(t)$ are solutions, so is $C\V{u}(t) + D\V{v}(t)$. Our job is to find $n$ ``pure exponential solutions" $\V{u}(t) = e^{\lambda t}\V{x}$ by using $A\V{x} = \lambda \V{x}$. Here $\lambda$ is an eigenvalue while \V{x} is an eigenvector. First we check if $\V{u}(t)$ is a solution.
+	\begin{align*}
+		\frac{d\V{u}}{dt} &= A \V{u} \\
+		\frac{d}{dt}\left( e^{\lambda t}\V{x} \right) &= Ae^{\lambda t}\V{x} \\
+		\lambda \cancel{e^{\lambda t}} \V{x} &= A \cancel{e^{\lambda t}}\V{x} \\
+		\lambda \V{x} &= A \V{x}
+	\end{align*}
+	
+All components of this special solution $\V{u} = e^{\lambda t}\V{x}$ share the same $e^{\lambda t}$. For a certain system, the pure exponential solutions $\V{u}_1 = e^{\lambda_1 t}\V{x}_1$ satisfies $A\V{u}_1 = \V{u}_1$, $\V{u}_2 = e^{\lambda_2 t}\V{x}_2$ satisfies $A\V{u}_2 = \V{u}_2$, and so on. The solution \textbf{grows} when $\lambda>0$. It \textbf{decays} when $\lambda < 0$. If $\lambda$ is a complex number, its real part decides growth or decay. The imaginary part $\omega$ \textbf{gives oscillation} $e^{i \omega t}$ like a sine wave.
+	
+	\begin{example}
+		Solve the following system of differential equations.\begin{align*}\frac{du_1}{dt} &= -u_1 + 2u_2 \\\frac{du_2}{dt} &=  u_1 - 2u_2. \\\end{align*} Here $A = \begin{bmatrix}-1 & 2\\ 1 & -2\end{bmatrix}$ and the initial value $\V{u}_0 = \begin{bmatrix}1 \\ 0\end{bmatrix}$.
+		\begin{gather*}
+		\intertext{We want to solve:}
+			\frac{d \V{u}}{dt} = A \V{u} \\
+			\frac{d}{dt}\begin{bmatrix}u_1 \\u_2\end{bmatrix}  = \begin{bmatrix}-1 & 2\\ 1 & -2\end{bmatrix} \begin{bmatrix}u_1 \\u_2\end{bmatrix}
+		\intertext{We need to find the eigenvalues and eigenvectors of $A$. We know that $A$ is a singular matrix, hence one of its eigenvalues is $\lambda_1 = 0$. We can get the second eigenvalue from the trace which is $\lambda_2 = -3$. We then find the eigenvectors. First for $\lambda_1$,}
+			(A - \cancelto{0}{\lambda_1} I)\V{x}_1 = 0 \\
+			\begin{bmatrix}-1 & 2\\ 1 & -2\end{bmatrix} \V{x}_1 = 0\\
+			\V{x}_1 = \begin{bmatrix} 2 \\ 1\end{bmatrix}
+		\intertext{For the second eigenvector,}
+			(A - \lambda_2 I)\V{x}_2 = 0 \\
+			\begin{bmatrix}2 & 2\\ 1 & 1\end{bmatrix} \V{x}_2 = 0\\
+			\V{x}_2 = \begin{bmatrix} 1 \\ -1\end{bmatrix}
+		\intertext{Then the general solution becomes:}
+			\V{u}(t) = c_1 e^{\lambda_1 t} \V{x}_1 + c_2 e^{\lambda_2 t} \V{x}_2 \\
+			 = c_1 \begin{bmatrix} 2 \\1 \end{bmatrix} + c_2 e^{-3 t} \begin{bmatrix} 1 \\-1 \end{bmatrix}
+		\intertext{We then find $c_1$ and $c_2$.}
+			\V{u}(0) = c_1 \begin{bmatrix} 2 \\1 \end{bmatrix} + c_2 e^{-3 (0)} \begin{bmatrix} 1 \\-1 \end{bmatrix} = \begin{bmatrix} 1 \\0 \end{bmatrix} \\
+					 \begin{bmatrix}2 & 1\\ 1 & -1\end{bmatrix} \begin{bmatrix} c_1 \\ c_2 \end{bmatrix}= \begin{bmatrix} 1 \\0 \end{bmatrix}\\
+					 \begin{bmatrix} c_1 \\ c_2 \end{bmatrix} = \begin{bmatrix} 1/3 \\ 1/3 \end{bmatrix}
+		\intertext{Hence the solution is:}
+			\boxed{\V{u}(t) = \frac13 \begin{bmatrix} 2 \\1 \end{bmatrix} + \frac13 e^{-3 t} \begin{bmatrix} 1 \\-1 \end{bmatrix}}
+		\end{gather*}
+	\end{example}
+	
+	
+	\DefinitionSpace
+	\begin{example}
+		Solve $\frac{d\V{u}}{dt} = A \V{u} = \begin{bmatrix}0&1\\1&0\end{bmatrix}\V{u}$ starting from $\V{u}(0) = \begin{bmatrix}4 \\2 \end{bmatrix}$. This is a vector equation for \V{u}. It contains two scalar equations for the components $y, z$. They are ``coupled together" because the matrix is not diagonal.
+		
+			\begin{gather*}
+				\frac{d\V{u}}{dt} = A \V{u} \\
+				\frac{d}{dt} \begin{bmatrix} y \\ z \end{bmatrix} = \begin{bmatrix}0&1\\1&0\end{bmatrix} \begin{bmatrix} y \\ z \end{bmatrix} \\ 
+			\intertext{The equation above means:}
+				\frac{dy}{dt} = z \text{\quad and \quad} \frac{dz}{dt} = y
+			\intertext{Finding the eigenvalues,}
+				\det(A - \lambda I) = 0 \\
+				\det\left( \begin{bmatrix}0&1\\1&0\end{bmatrix} - \begin{bmatrix}\lambda&0\\0&\lambda\end{bmatrix} \right) = 0 \\
+				\begin{vmatrix} -\lambda & 1 \\ 1 & -\lambda\end{vmatrix} = 0 \\
+				\lambda^2 - 1 = 0 \\
+				(\lambda-1)(\lambda+1) = 0 \\
+				\boxed{\lambda_1 = 1,\quad\lambda_2=-1}
+			\intertext{Finding the first eigenvector,}
+				(A - \lambda_1 I)\V{x}_1 = 0 \\
+				\begin{bmatrix}-1 & 1\\ 1 & -1\end{bmatrix} \V{x}_1 = 0\\
+				\V{x}_1 = \begin{bmatrix} 1 \\ 1\end{bmatrix}
+			\intertext{Finding the second eigenvector,}
+				(A - \lambda_2 I)\V{x}_2 = 0 \\
+				\begin{bmatrix}1 & 1\\ 1 & 1\end{bmatrix} \V{x}_2 = 0\\
+				\V{x}_2 = \begin{bmatrix} 1 \\ -1\end{bmatrix}
+			\intertext{The general solution becomes:}
+				\V{u}(t) = c_1 e^{\lambda_1 t} \V{x}_1 + c_2 e^{\lambda_2 t} \V{x}_2 =  c_1 e^{t} \begin{bmatrix} 1 \\ 1\end{bmatrix} + c_2 e^{-t} \begin{bmatrix} 1 \\ -1\end{bmatrix}
+			\intertext{Finding the constants $c_1, c_2$,}
+				\V{u}(0) = c_1 \begin{bmatrix} 1 \\ 1\end{bmatrix} + c_2 \begin{bmatrix} 1 \\ -1\end{bmatrix} = \begin{bmatrix} 4 \\ 2\end{bmatrix} \\
+				\begin{bmatrix} 1 & 1\\ 1& -1\end{bmatrix}\begin{bmatrix} c_1 \\ c_2\end{bmatrix} = \begin{bmatrix} 4 \\ 2\end{bmatrix} \\
+				\begin{bmatrix} c_1 \\ c_2\end{bmatrix} = \begin{bmatrix} 3 \\ 1 \end{bmatrix}
+			\intertext{Therefore, the solution becomes:}
+				\boxed{\V{u}(t) = 3 e^{t} \begin{bmatrix} 1 \\ 1\end{bmatrix} + e^{-t} \begin{bmatrix} 1 \\ -1\end{bmatrix}}
+			\intertext{We would like to remind ourselves that really, the final solution is expressed in terms of a diagonalization:}
+				\V{u}(t) = X\Lambda X^{-1} \V{u}_0 = X\Lambda c = \begin{bmatrix}1&1\\ 1&-1\end{bmatrix}\begin{bmatrix}e^t&0\\ 0&e^{-t}\end{bmatrix}\begin{bmatrix}3\\ 1\end{bmatrix}
+			\end{gather*}
+	\end{example}
+
+	\paragraph{Summary} The same three steps in calculating $\V{u}_{k+1} = A\V{u}_k$ now solve $\frac{d\V{u}}{dt} = A\V{u}$.
+	\begin{enumerate}
+		\item Write $\V{u}_0$ as a combination $c_1 \V{x}_1 + \ldots c_n \V{x}_n$ of the eigenvectors of $A$.
+		\item Multiply each eigenvector $\V{x}_i$ by its growth factor $e^{\lambda_i t}$.
+		\item The solution is the same combination of those pure solutions $e^{\lambda t}\V{x}$: \[\frac{d\V{u}}{dt} = A\V{u} \qquad \V{u}(t) = c_1 e^{\lambda_1 t}\V{x}_1 + \ldots + c_n e^{\lambda_n t}\V{x}_n.\] 
+	\end{enumerate}
+
+	\paragraph{Warning!} If a $\lambda$ repeats, with only one eigenvector, another solution is needed which is $(te^{\lambda t})$.
 
 
+\subsection{Second Order Differential Equations}
+	The most important equation in mechanics is $my'' + by' + ky = 0$. The first term is the mass times the acceleration $a = y''$. The term $ma$ balances the force $F$ (Newton's second law). The force includes the damping $-by'$ and the elastic force $-ky$. This second order differential equation is still linear with coefficients $m,b,k$.
+
+	The method of solution to this equation is to substitute $y = e^{\lambda t}$. Each derivative of $y$ brings down a factor $\lambda$.
+	\begin{align*}
+		m \frac{d^2 y}{dt^2} + b\frac{dy}{dt} + ky = 0 \\
+		m \frac{d^2}{dt^2}e^{\lambda t} + b\frac{d}{dt}e^{\lambda t} + ke^{\lambda t} = 0 \\
+		m \lambda \frac{d}{dt} e^{\lambda t} + b \lambda e^{\lambda t} + ke^{\lambda t} = 0 \\
+		m \lambda^2 e^{\lambda t} + b \lambda e^{\lambda t} + ke^{\lambda t} = 0 \\
+		(m \lambda^2  + b \lambda + k)e^{\lambda t} = 0
+	\end{align*} 
+	There are two roots for $\lambda, \lambda_1 \text{ and } \lambda_2$. This equation for $y$ has two pure solutions $y_1 = e^{\lambda_1 t}$ and $y_2 = e^{\lambda_2 t}$. Their combinations $c_1 y_1 + c_2 y_2$ give the complete solution unless the $\lambda$'s are the same. We want to express the problem into a vector equation for $y$ and $y'$. We have: \begin{equation}
+			\frac{d}{dt} \begin{bmatrix} y \\ y'\end{bmatrix} = \begin{bmatrix} 0 & 1\\ -k & -b\end{bmatrix}\begin{bmatrix} y \\ y'\end{bmatrix} = A\V{u}
+		\end{equation}$A$ comes from the fact that $y'=y'$ and $y'' = -b y' - ky$. We then solve $\V{u}' = A \V{u}$ by the eigenvalues of $A$.
+
+	\begin{align*}
+		\det(A - \lambda I) &= 0 \\
+		\begin{vmatrix}-\lambda & 1 \\ -k & -b-\lambda \end{vmatrix} &= 0\\
+		\lambda^2 + b\lambda + k &= 0		
+	\intertext{The roots $\lambda_1 \text{ and } \lambda_2$ will become our eigenvalues. Now to find the eigenvectors. Finding $\V{x}_1$:}
+		\begin{bmatrix}-\lambda_1 & 1 \\ -k & -b-\lambda_1 \end{bmatrix}\V{x}_1 &= 0 \\
+		\V{x}_1 &= \begin{bmatrix}1 \\ \lambda_1\end{bmatrix}
+	\intertext{$\V{x}_1$ will hold if $-k + \lambda_1(-b-\lambda_1) = 0$. Finding $\V{x}_2$.}
+		\begin{bmatrix}-\lambda_2 & 1 \\ -k & -b-\lambda_2 \end{bmatrix}\V{x}_2 &= 0 \\
+		\V{x}_2 &= \begin{bmatrix}1 \\ \lambda_2\end{bmatrix}
+	\intertext{$\V{x}_2$ will hold if $-k + \lambda_2(-b-\lambda_2) = 0$. The general solution will then be:}
+		\V{u}(t) = c_1 e^{\lambda_1 t} \begin{bmatrix}1 \\ \lambda_1\end{bmatrix} +  c_2 e^{\lambda_2 t} \begin{bmatrix}1 \\ \lambda_2\end{bmatrix}
+	\end{align*}
+	
+	\DefinitionSpace
+	\begin{example}
+		\textbf{Motion around a circle with $y'' + y = 0$ and $y = \cos(t)$}. This is our master equation with mass $m=1$ and stiffness $k=1$ and $d=0$ (no damping). Substitute $y = e^{\lambda t}$ into $y'' + y = 0$ to reach $\lambda^2 + 1 = 0$. The roots are complex numbers $\lambda = \pm i$. Then half of $e^{it} + e^{-it}$ gives the solution $y = \cos(t)$. The initial values are $y(0) = 1, y'(0)=0$. Find $\V{u}(t)$.
+		
+			\begin{gather*}
+				\frac{d}{dt} \begin{bmatrix} y \\ y'\end{bmatrix} = \begin{bmatrix} 0 & 1\\ -1 & 0\end{bmatrix}\begin{bmatrix} y \\ y'\end{bmatrix} = A\V{u}
+			\intertext{Fining the eigenvalues:}
+				\det(A - \lambda I) = 0 \\
+				\begin{vmatrix}-\lambda & 1 \\ -1 & -\lambda \end{vmatrix} = 0\\		
+				\lambda^2 + 1 = 0\\
+				(\lambda - i)(\lambda + i) = 0 \\
+				\boxed{\lambda_1 = i \qquad \lambda_2 = i}\\
+			\intertext{Fining the eigenvector $\V{x}_1$:}
+				(A - \lambda_1 I)\V{x}_1 = 0 \\
+				\begin{bmatrix} -i & 1\\ -1 & -i\end{bmatrix}\V{x} = \begin{bmatrix} 0 \\ 0\end{bmatrix} \\
+				\V{x}_1 = \begin{bmatrix}1 \\ i \end{bmatrix}
+			\intertext{Fining the eigenvector $\V{x}_2$:}
+				(A - \lambda_2 I)\V{x}_1 = 0 \\
+				\begin{bmatrix} i & 1\\ -1 & i\end{bmatrix}\V{x} = \begin{bmatrix} 0 \\ 0\end{bmatrix} \\
+				\V{x}_2 = \begin{bmatrix}1 \\ -i \end{bmatrix}
+			\intertext{The general solution is:}
+				\V{u}(t) = c_1 e^{it} \begin{bmatrix}1 \\ i\end{bmatrix} +  c_2 e^{-it} \begin{bmatrix}1 \\ -i\end{bmatrix} \\
+				\V{u}(t) =  \begin{bmatrix}c_1 e^{it} + c_2 e^{-it} \\ ic_1 e^{it} - ic_2 e^{-it}\end{bmatrix}
+			\intertext{Finding $c_1$ and $c_2$:}
+				\begin{bmatrix}1&1\\ i&-i\end{bmatrix}\begin{bmatrix}c_1 \\ c_2\end{bmatrix} = \begin{bmatrix}1 \\ 0\end{bmatrix}\\ 
+				\V{c} = \begin{bmatrix}1&1\\ i&-i\end{bmatrix}^{-1}\begin{bmatrix}1\\ 0\end{bmatrix} = \begin{bmatrix}\frac{1}{2}\\ \frac{1}{2}\end{bmatrix}
+			\intertext{The final solution is:}
+			\renewcommand\arraystretch{1.5}
+				\boxed{\V{u}(t) = \begin{bmatrix} y(t) \\ y'(t)\end{bmatrix} = \begin{bmatrix}\frac12 \left(  e^{it} + e^{-it} \right) \\ \frac12 i \left( e^{it} - e^{-it}\right) \end{bmatrix}= \begin{bmatrix} \cos(t) \\ -\sin(t)\end{bmatrix}} 
+			\end{gather*}
+	\end{example}
+
+\subsection{Exponential of a Matrix}
+	We want to write the solution $\V{u}(t)$ in a new form $e^{A t}\V{u}(0)$. First we have to define what $e^{At}$ means by copying the Taylor Series representation of $e^x$ for numbers.
+		\begin{gather*}
+			e^{At} = \sum_{n=0}^{\infty} \frac{(At)^n}{n!} = I + (At) + \frac12 (At)^2 + \frac16 (At)^3 + \ldots
+		\intertext{Its derivative with respect to $t$ is:}
+			\frac{d}{dt}e^{At} = A e^{At} = \sum_{n=0}^{\infty} \frac{(At)^n}{n!} = A + A^2t + \frac12 A^3t^2 + \frac16 A^4t^3 + \ldots
+		\intertext{The eigenvalues are $e^{\lambda t}$}
+			e^{At}\V{x} = \left( \sum_{n=0}^{\infty} \frac{(At)^n}{n!}\right)\V{x}  = (I + (At) + \frac12 (At)^2 + \frac16 (At)^3 + \ldots)\V{x} = (1 + \lambda t + \frac{1}{2}(\lambda t)^2 + \ldots)\V{x}
+		\end{gather*}
+		
+	The series always converges and its derivative is always $Ae^{At}$. Therefore $e^{At}\V{u}(0)$ solves the differential equation with one quick formula - even if there is a shortage of eigenvectors. This chapter emphasizes how to find $\V{u}(t) = e^{At}\V{u}(0)$ by diagonalization. Assume $A$ does have $n$ independent eigenvectors, so it is diagonalizable. Substitute $A = S \Lambda S^{-1}$ into the series for $e^{At}$.
+		\begin{align*}
+			e^{At} = e^{X \Lambda X^{-1}t} = \sum_{n=0}^{\infty} \frac{(X \Lambda X^{-1}t)^n}{n!} &= I + (X \Lambda X^{-1}t) + \frac12 (X \Lambda X^{-1}t)^2 + \ldots\\
+			&= X \left[ I + \Lambda t + \frac12(\Lambda t)^2 + \ldots\right] X^{-1}\\
+		\intertext{We now arrive at a diagonalized form for $e^{At}$:}
+			\Aboxed{e^{A t} &= X e^{\Lambda t} X^{-1}} \numberthis
+		\end{align*}
+		
+		\noindent The solution becomes:
+		\begin{equation*}
+			\V{u}(t) = e^{A t}\V{u}_0 = X e^{\Lambda t} X^{-1} \V{u}(0) = \begin{bmatrix}
+																				|    & \ldots & | \\
+																				\V{x}_1 & \ldots & \V{x}_n \\
+																				|    & \ldots & |
+																				\end{bmatrix}	\begin{bmatrix}
+																									e^{\lambda_1 t}  &        &  \\
+																									& \ddots &  \\
+																									&        & e^{\lambda_n t}
+																									\end{bmatrix} \begin{bmatrix}
+																													c_1 \\
+																													\vdots \\
+																													c_n
+																													\end{bmatrix}
+		\end{equation*}
+	\begin{example}
+		Solve $y'' - 2y' + y = 0$.
+			\begin{gather*}
+				\frac{d\V{u}}{dt} = A \V{u}
+								  = \begin{bmatrix}0 & 1\\-1 & 2\end{bmatrix}\V{u}
+			\intertext{Finding the eigenvalues of $A$:}
+				\det(A - \lambda I) = 0 \\
+				\det\left( \begin{bmatrix}0 & 1\\-1 & 2\end{bmatrix} - \begin{bmatrix}\lambda & 0\\0 & \lambda\end{bmatrix} \right) = 0 \\
+				\begin{vmatrix} -\lambda & 1\\ -1 & 2-\lambda\end{vmatrix} = 0 \\
+				(\lambda - 1) = 0 \\
+				\boxed{\lambda_{1,2} = 1}
+			\intertext{Here we only have one unique eigenvalue. We then find the eigenvector $\V{x}_1$.}
+				(A - \lambda_1 I)\V{x}_1 = \textbf{0}\\
+				\begin{bmatrix}-1 & 1\\-1 & 1\end{bmatrix} \V{x}_1 = \textbf{0}\\
+				\V{x}_1 = \begin{bmatrix}1\\1\end{bmatrix}
+			\intertext{Hence diagonalization is not possible because we do not have 2 eigenvectors. We will then compute $e^{At}$ instead.}
+				e^{A t} = e^{At + It - It} = e^{t}e^{(A-I)t} = e^{t} \sum_{n=0}^{\infty} \frac{((A-I)t)^n}{n!}
+			\intertext{Expanding the series:}
+				\sum_{n=0}^{\infty} \frac{(((A-I)t)^n}{n!} = I + (A-I)t + \frac12 (A-I)^2t^2 + \frac16 (A-I)^3t^3 + \ldots
+			\intertext{When the series reaches $n=2$ and above, the $(A-I)$ term becomes zero. Hence,}
+				e^{A t} =  e^{t} (I + (A-I)t)
+			\intertext{Hence,}
+				\V{u} = \begin{bmatrix}y \\ y'\end{bmatrix} = e^{t} \left[ I + \begin{bmatrix}-1 & 1\\-1 & 1\end{bmatrix}t\right]  \begin{bmatrix}y(0) \\ y'(0)\end{bmatrix} = \begin{bmatrix}e^t y(0)- t e^t y(0) + t e^t y'(0)\\ -e^t t y(0) + e^ty'(0) + t e^t y'(0)\end{bmatrix}
+			\intertext{The solution to our problem becomes:}
+				y(t) = e^t y(0)- t e^t y(0) + t e^t y'(0)
+			\end{gather*}
+	\end{example}
+
+	\DefinitionSpace
+	\begin{example}
+		Use the infinite series to find $e^{At}$ for $A = \begin{bmatrix}0 & 1\\-1 & 0\end{bmatrix}$.
+			\begin{align*}
+				e^{At} &= I  + (At) + \frac12 (At)^2 + \frac16 (At)^3 + \frac{1}{24} (At)^4 + \ldots \\[1em]
+				       &= \begin{bmatrix}1&0\\ 0&1\end{bmatrix} + \begin{bmatrix}0&t\\ -t&0\end{bmatrix} + \frac12\begin{bmatrix}-t^2&0\\ 0&-t^2\end{bmatrix}+ \frac16\begin{bmatrix}0&-t^3\\ t^3&0\end{bmatrix} + \frac{1}{24}\begin{bmatrix}t^4&0\\ 0&t^4\end{bmatrix} \\[1em]
+				\intertext{Notice that when we reach $n=5$, the signs are the same as $n=2$,}
+				       &=  \renewcommand\arraystretch{2}\begin{bmatrix}
+					      	1 - \frac12 t^2 + \frac{1}{24}t^4 + \ldots & t - \frac{1}{6}t^3+ \ldots\\
+					      	-t + \frac16 t^3 + \ldots                  & 1 - \frac12 t^2 + \frac{1}{24}t^4 + \ldots
+					       \end{bmatrix}\\[1em]
+					   &= \renewcommand\arraystretch{2}\begin{bmatrix}
+						   \sum_{n=0}^{\infty}\frac{x^{2n}}{(2n)!} & \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n+1}}{(2n+1)!}\\
+						   -\sum_{n=0}^{\infty} (-1)^n \frac{x^{2n+1}}{(2n+1)!}                 & \sum_{n=0}^{\infty}\frac{x^{2n}}{(2n)!}
+						   \end{bmatrix}\\[1em]
+					e^{At} &=\begin{bmatrix}\cos(t) & \sin(t) \\ -\sin(t) & \cos(t)\end{bmatrix}
+			\end{align*}
+	\end{example}
+
+	\DefinitionSpace
+	\begin{example}
+		Solve $\frac{d\V{u}}{dt} = A \V{u} = \begin{bmatrix}1 & 1\\ 0 & 2\end{bmatrix}\V{u}$ starting from $\V{u}(0) = \begin{bmatrix}2 \\ 1\end{bmatrix}$.
+			\begin{gather*}
+				\intertext{We can see the eigenvalues immediately since $A$ is a triangular matrix. These are $\lambda_1=1$ and $\lambda_2=2$. Now to find the eigenvectors. For $\V{x}_1$:}
+					(A - \lambda_1 I)\V{x}_1 = \textbf{0} \\
+					\begin{bmatrix}0&1\\0&1\end{bmatrix}\V{x}_2 = \textbf{0}\\
+					\V{x}_1 = \begin{bmatrix}1 \\0\end{bmatrix}
+				\intertext{Finding $\V{x}_2$:}
+					(A - \lambda_2 I)\V{x}_2 = \textbf{0} \\
+					\begin{bmatrix}-1&1\\0&0\end{bmatrix}\V{x}_2 = \textbf{0}\\
+					\V{x}_2 = \begin{bmatrix}1 \\ 1\end{bmatrix}
+				\intertext{The solution becomes:}
+					\V{u}(t) = X e^{\Lambda t} X^{-1} \V{u}(0) = \begin{bmatrix}1&1 \\0 & 1\end{bmatrix}\begin{bmatrix}e^t&0 \\0 & e^{2t}\end{bmatrix}\begin{bmatrix}1&-1 \\0 & 1\end{bmatrix} = \begin{bmatrix}e^t+e^{2t}\\ e^{2t}\end{bmatrix}
+			\end{gather*}
+	\end{example}
+	
+\section{Symmetric Matrices}
+\section{Positive Definite Matrices}
+	
 \end{document}
