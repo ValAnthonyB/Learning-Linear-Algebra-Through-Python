@@ -13,10 +13,10 @@
 \newcommand{\Vector}[1]{$\textbf{#1}$}
 \newcommand{\V}[1]{\textbf{\textit{#1}}}
 \newcommand{\trace}[1]{\text{trace$(#1)$}}
-
+\newcommand*{\conj}[1]{\bar{#1}}
 
 \newcommand{\DefinitionSpace}{\vspace{15px}}
-\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand{\numberthis}{\addtocounter{equation}{1}\tag{\theequation}}
 
 \newtheorem*{remark}{Remark}
 
@@ -737,7 +737,7 @@ All components of this special solution $\V{u} = e^{\lambda t}\V{x}$ share the s
 			\intertext{When the series reaches $n=2$ and above, the $(A-I)$ term becomes zero. Hence,}
 				e^{A t} =  e^{t} (I + (A-I)t)
 			\intertext{Hence,}
-				\V{u} = \begin{bmatrix}y \\ y'\end{bmatrix} = e^{t} \left[ I + \begin{bmatrix}-1 & 1\\-1 & 1\end{bmatrix}t\right]  \begin{bmatrix}y(0) \\ y'(0)\end{bmatrix} = \begin{bmatrix}e^t y(0)- t e^t y(0) + t e^t y'(0)\\ -e^t t y(0) + e^ty'(0) + t e^t y'(0)\end{bmatrix}
+				\V{u} = \begin{bmatrix}y \\ y'\end{bmatrix} = e^{t} \left[ I + \begin{bmatrix}-1 & 1\\-1 & 1\end{bmatrix}t\right]  \begin{bmatrix}y(0) \\ y'(0)\end{bmatrix} = \renewcommand\arraystretch{1.5}\begin{bmatrix}e^t y(0)- t e^t y(0) + t e^t y'(0)\\ -e^t t y(0) + e^ty'(0) + t e^t y'(0)\end{bmatrix}
 			\intertext{The solution to our problem becomes:}
 				y(t) = e^t y(0)- t e^t y(0) + t e^t y'(0)
 			\end{gather*}
@@ -780,6 +780,153 @@ All components of this special solution $\V{u} = e^{\lambda t}\V{x}$ share the s
 	\end{example}
 	
 \section{Symmetric Matrices}
+Say we are given an equation $S \V{x} = \lambda \V{x}$ where $S$ is a symmetric matrix ($S = S^T$). When we diagonalize $S = X^{-1}\Lambda X$ and take its transpose, we get an interesting property.]:
+
+	\begin{gather*}
+		S^T = (X \Lambda X^{-1})^T = X^T \Lambda (X^{-1})^T
+	\intertext{Since $S = S^T$, therefore}
+		X^{-1} = X^T
+	\intertext{Then,}
+		X^TX = I
+	\intertext{This means that the $n$ eigenvectors in $X$ are orthogonal.}
+	\end{gather*}
+
+\noindent Here are key facts about symmetric matrices:
+	\begin{enumerate}
+		\item A symmetric matrix has only real eigenvectors
+		\item The eigenvectors can be chosen orthonormal (a normalized orthogonal matrix).
+	\end{enumerate}
+	\DefinitionSpace
+\textbf{Every symmetric matrix can be diagonalized}. Its eigenvector matrix $X$ becomes an orthogonal matrix $Q$. Orthogonal matrices make use of the property $Q^{-1} = Q^T$.
+
+	\DefinitionSpace
+	\begin{theorem}{\textbf{First Spectral Theorem}}
+		Every symmetric matrix has the factorization $S = Q \Lambda Q^T$ with real eigenvalues of $\Lambda$ and orthonormal eigenvectors in the columns $Q$.
+			\begin{equation}
+				S = Q\Lambda Q^{-1} = Q\Lambda Q^T
+			\end{equation}
+	\end{theorem}
+
+	\begin{proof}
+		We need to prove that a symmetric matrix does not have repeating eigenvalues.
+	\end{proof}
+	
+	\begin{proof}
+		We need to prove that the diagonalization $Q\Lambda Q^T$ is still symmetric.
+			\begin{gather*}
+				\intertext{Taking the transpose:}
+					(Q\Lambda Q^T)^T = Q\Lambda Q^T
+ 			\end{gather*}
+	\end{proof}
+
+
+	\begin{theorem}
+		All eigenvalues of a real symmetric matrix are real.
+	\end{theorem}
+	\begin{proof}
+			\begin{gather*}
+				\intertext{Suppose that $S\V{x} = \lambda \V{x}$, $\lambda$ might be a complex number $a + ib$ ($a$ and $b$ are real). Its complex conjugate $\conj{\lambda} = a - ib$. \V{x} might be complex numbers also, $\conj{\V{x}}$ gives the imaginary part. Then we have two equations.} 
+					S \V{x} = \lambda \V{x} \label{1eq} \numberthis \\
+				    S \conj{\V{x}} = \lambda \conj{\V{x}} \label{2eq} \numberthis
+				\intertext{Transposing Equation \eqref{2eq}, we have,}
+					\conj{\V{x}}^T S^T = \conj{\V{x}}^T \conj{\lambda} \\
+					\conj{\V{x}}^T S = \conj{\V{x}}^T \conj{\lambda} \label{3eq} \numberthis
+				\intertext{Taking the dot product of $\conj{\V{x}}$ with Equation \eqref{1eq}:}
+					\conj{\V{x}} \cdot S \V{x} = \conj{\V{x}} \cdot \lambda \V{x} \\
+					\conj{\V{x}}^T S \V{x} = \conj{\V{x}}^T \lambda \V{x} \label{4eq} \numberthis
+				\intertext{Multiplying Equation \eqref{3eq} with $\conj{\V{x}}$:}
+					\conj{\V{x}}^T S \V{x} = \conj{\V{x}}^T \conj{\lambda} \V{x} \label{5eq}\numberthis
+				\intertext{The right sides of Equations \eqref{4eq} and \eqref{5eq} are equal.}
+					\conj{\V{x}}^T \lambda \V{x} = \conj{\V{x}}^T \conj{\lambda} \V{x} \\
+					\lambda\conj{\V{x}}^T  \V{x} = \conj{\lambda} \conj{\V{x}}^T  \V{x} \\
+				\intertext{$\conj{\V{x}}^T  \V{x}$ is just the norm $||\V{x}||^2$ which is always positive. Hence:}
+					\lambda = \conj{\lambda}
+				\intertext{Therefore:}
+					a + ib = a - ib\\
+					b = 0
+				\intertext{$\lambda$ is always real.}
+			\end{gather*}
+	\end{proof}
+
+
+
+
+	\begin{theorem}
+		Eigenvectors of a real symmetric matrix (when they correspond to different $\lambda$'s) are always perpendicular.
+	\end{theorem}
+	\begin{proof}
+		\begin{gather*}
+			S\V{x} = \lambda_1 \V{x} \label{ex1}\numberthis\\
+			S\V{y} = \lambda_2 \V{y} \label{ex2}\numberthis
+		\intertext{Taking the dot product of Equation \eqref{ex1} with \V{y}}
+			S\V{x} \cdot \V{y} = \lambda_1 \V{x} \cdot \V{y} \\
+			S\V{x}^T \V{y} =  \V{x}^T\lambda_1 \V{y} \label{ex3}\numberthis
+		\intertext{Taking the dot product of \V{y} with Equation \eqref{ex2}}
+			\V{x} \cdot S\V{y} = \V{x} \cdot \lambda_2 \V{y} \\
+			\V{x}^T S \V{y} =  \V{x}^T\lambda_2 \V{y} \label{ex4} \numberthis
+		\intertext{The left hand sides of Equations \eqref{ex3} and \eqref{ex4} are equal. Then,}
+			\V{x}^T \lambda_1 \V{y} = \V{x}^T \lambda_2 \V{y} \label{ex5} \numberthis
+		\intertext{Since $\lambda_1 \ne \lambda_2$, for Equation \eqref{ex5} to hold,}
+			\boxed{\V{x}^T \V{y} = 0}
+		\intertext{The eigenvectors are perpendicular.}
+		\end{gather*}
+	\end{proof}
+	
+	\begin{remark}
+		Every symmetric matrix that are diagonalizable can be expressed by the following:
+		\begin{equation}
+			S = Q \Lambda Q^T = \lambda_1 q_1 q_1^T + \lambda_2 q_2 q_2^T + \ldots + \lambda_n q_n q_n^T
+		\end{equation}
+	\end{remark}
+
+
+\subsection{Complex Eigenvalues of Real Matrices}
+For real matrices, complex eigenvalues and eigenvectors come in conjugate pairs. Let $\lambda = a + ib$, then its complex conjugate will be $\conj{\lambda} = a - ib$:
+	\begin{gather*}
+		\text{If } A\V{x} = \lambda \V{x}, \text{ then } A\conj{\V{x}} = \conj{\lambda} \conj{\V{x}}.
+	\end{gather*}
+
+	\begin{example}
+		Find the eigenvalues and eigenvectors of \[ A = \begin{bmatrix}\cos{\theta} & -\sin{\theta} \\ \sin{\theta} & \cos{\theta} \end{bmatrix}.\]
+			\begin{gather*}
+				\intertext{Computing for the eigenvalues:}
+					\det(A - \lambda I) = 0\\
+					\begin{vmatrix}\cos{\theta}-\lambda & -\sin{\theta}\\ \sin{\theta} & \cos{\theta} - \lambda\end{vmatrix} = 0 \\
+					(\cos{\theta} - \lambda)^2 + \sin^2{\theta} = 0\\
+					\lambda^2 - 2\lambda \cos{\theta} + 1 = 0 \\
+					\lambda_1 = \cos{\theta} + i \sin{\theta} \qquad \lambda_2 = \cos{\theta} - i \sin{\theta} 
+				\intertext{We can see that $\lambda_2 = \conj{\lambda}_1$, these are a conjugate pair. Next we find the eigenvectors:}
+					(A-\lambda_1 I)\V{x}_1 = 0 \\
+					\left( \begin{bmatrix}\cos{\theta} & -\sin{\theta} \\ \sin{\theta} & \cos{\theta} \end{bmatrix} - (\cos{\theta} + i \sin{\theta}) \begin{bmatrix} 1 & 0 \\ 0 & 1\end{bmatrix}\right) \V{x}_1 = \textbf{0} \\
+					\begin{bmatrix}
+						-i\sin{\theta} & -\sin{\theta} \\
+						\sin{\theta} & -i\sin{\theta}
+					\end{bmatrix} \V{x}_1 = \textbf{0} \\
+					\V{x}_1 = \begin{bmatrix}
+								1 \\ -i
+							\end{bmatrix}
+				\intertext{Fining $\V{x}_2$:}
+					(A-\lambda_2 I)\V{x}_2 = 0 \\
+					\left( \begin{bmatrix}\cos{\theta} & -\sin{\theta} \\ \sin{\theta} & \cos{\theta} \end{bmatrix} - (\cos{\theta} - i \sin{\theta}) \begin{bmatrix} 1 & 0 \\ 0 & 1\end{bmatrix}\right) \V{x}_2 = \textbf{0} \\
+					\begin{bmatrix}
+						i\sin{\theta} & -\sin{\theta} \\
+						\sin{\theta} &   i\sin{\theta}
+					\end{bmatrix} \V{x}_2 = \textbf{0} \\
+					\V{x}_2 = \begin{bmatrix}
+								1 \\ i
+								\end{bmatrix}
+				\intertext{Again, we see that the eigenvectors are a conjugate pair.}
+			\end{gather*}
+	\end{example}
+
+\subsection{All Symmetric Matrices are Diagonalizable}
+	For nonsymmetric matrices, a shortage of eigenvalues (repeating eigenvalues) cause a shortage of eigenvectors. This never happens in symmetric matrices. \textbf{There are always enough eigenvectors to diagonalize $S=S^T$}.
+	
+	Every square matrix can be ``triangularized" by $A = Q T Q^{-1}$. If $A = S$ (symmetric), then $T = \Lambda$. 
+		\begin{theorem}
+			Every square $A$ factors into $Q T Q^{-1}$ where $T$ is upper triangular and $\conj{Q}^T = Q^{-1}$. If $A$ has real eigenvalues then $Q$ and $T$ can be chosen real $Q^T Q = I$.
+		\end{theorem}
+
 \section{Positive Definite Matrices}
 	
 \end{document}

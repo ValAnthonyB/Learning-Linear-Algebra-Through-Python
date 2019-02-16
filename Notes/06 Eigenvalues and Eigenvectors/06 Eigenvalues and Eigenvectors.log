@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.4.5)  15 FEB 2019 23:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.4.5)  17 FEB 2019 00:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -369,13 +369,13 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {c:/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5]
  [6] [7] [8] [9]
-[10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21]
+[10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24]
 (./06 Eigenvalues and Eigenvectors.aux) ) 
 Here is how much of TeX's memory you used:
- 4152 strings out of 494893
- 58616 string characters out of 6179935
- 156143 words of memory out of 5000000
- 7371 multiletter control sequences out of 15000+600000
+ 4163 strings out of 494893
+ 58670 string characters out of 6179935
+ 156270 words of memory out of 5000000
+ 7382 multiletter control sequences out of 15000+600000
  17070 words of font info for 63 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  39i,19n,43p,653b,288s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -396,11 +396,11 @@ texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2
 dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2017/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/pu
 blic/amsfonts/latxfont/line10.pfb>
-Output written on "06 Eigenvalues and Eigenvectors.pdf" (21 pages, 238982 bytes
+Output written on "06 Eigenvalues and Eigenvectors.pdf" (24 pages, 247808 bytes
 ).
 PDF statistics:
- 145 PDF objects out of 1000 (max. 8388607)
- 102 compressed objects within 2 object streams
+ 154 PDF objects out of 1000 (max. 8388607)
+ 108 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
