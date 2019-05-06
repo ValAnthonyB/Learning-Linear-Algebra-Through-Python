@@ -7,6 +7,7 @@ In this repository, I code up some essential concepts in linear algebra from **G
 * Computing dot products of vectors from scratch and using numpy.linalg
 * Computing matrix multiplication
 
+
 ***02 Elimination***
 * Gaussian elimination of a square matrix using forward elimination
 * Gaussian elimination of a square matrix using elementary matrices
@@ -15,6 +16,27 @@ In this repository, I code up some essential concepts in linear algebra from **G
 * LU and LDU factorization
 * Transpose
 
+
 ***03 Projections and Least Squares***
-* Gram-Schmidt
+* Gram-Schmidt Orthonormalization
 * Fitting data points using least squares
+
+
+***04 Eigenvalues***
+* Computing eigenvalues and eigenvectors numerically
+
+
+***05 Image Segmentation with the use of Graph Theory***
+* Segment an image with pixels that are alike
+
+
+***06 Singular Value Decomposition***
+* Computing the compact SVD
+* Geometry of the SVD
+* Truncated SVD
+* Image compression
+
+
+***07 Facial Recognition using the Eigenfaces Method***
+* Match an unknown face with a face in an image database
+* Utilizes the compact SVD and projections
